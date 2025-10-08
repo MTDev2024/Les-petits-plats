@@ -1,0 +1,11 @@
+# Dépendances
+node_modules/
+
+# Build
+css/output.css
+
+# Config
+*.config.js
+
+# Fichiers de données (pas de logique à linter)
+js/data/recipes.js

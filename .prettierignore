@@ -1,0 +1,13 @@
+# Dépendances
+node_modules/
+
+# Build
+css/output.css
+css/output.css.map
+
+# Git
+.git/
+
+# Config
+package-lock.json
+tailwind.config.js

@@ -1,0 +1,96 @@
+# ========================================
+# FICHIERS SYSTÈME
+# ========================================
+# Fichiers cachés macOS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+
+# Fichiers cachés Windows
+ehthumbs.db
+Thumbs.db
+
+# ========================================
+# IDE ET ÉDITEURS
+# ========================================
+# Visual Studio Code
+.vscode/
+
+# IntelliJ IDEA / WebStorm
+.idea/
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# ========================================
+# LOGS ET DEBUGGING
+# ========================================
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ========================================
+# ESLINT / PRETTIER CACHE
+# ========================================
+.eslintcache
+.prettiercache
+
+# ========================================
+# FICHIERS TEMPORAIRES
+# ========================================
+*.tmp
+*.temp
+.cache/
+
+# ========================================
+# NODE.JS / NPM
+# ========================================
+# Dépendances Node (à ne JAMAIS versionner)
+node_modules/
+
+# Fichiers de verrouillage (optionnel selon équipe)
+# package-lock.json
+# yarn.lock
+
+# ========================================
+# TAILWIND CSS
+# ========================================
+# Fichier CSS généré automatiquement par Tailwind
+# (Ne pas versionner car régénéré à chaque build)
+css/output.css
+css/output.css.map
+
+# ========================================
+# ENVIRONNEMENT
+# ========================================
+# Variables d'environnement (si utilisées)
+.env
+.env.local
+.env.*.local
+
+# ========================================
+# BUILD ET DISTRIBUTION
+# ========================================
+dist/
+build/
+
+# ========================================
+# TESTS ET COVERAGE
+# ========================================
+coverage/
+.nyc_output/
+
+# ========================================
+# DOCUMENTATION TEMPORAIRE
+# ========================================
+*.pdf~
+*.docx~
