@@ -1,1 +1,35 @@
 @import 'tailwindcss';
+
+/* ==== FONTS AUTO-HÉBERGÉES ==== */
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('../fonts/manrope-v20-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Anton';
+  src: url('../fonts/anton-v25-latin-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==== VARIABLES TAILWIND ==== */
+
+@theme {
+  /* Couleurs */
+  --color-primary-yellow: #ffd15b;
+  --color-light-grey: #ededed;
+  --color-card-bg: #ffffff;
+  --color-text-grey: #7a7a7a;
+  --color-text-black: #000000;
+  --color--black: #1b1b1b;
+
+  /* Fonts */
+  --font-family-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-family-display: 'Anton', Impact, sans-serif;
+}

@@ -1,21 +1,101 @@
 <!doctype html>
 <html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Les Petits Plats - Trouvez rapidement la recette parfaite parmi nos 50 recettes de cuisine">
-  <meta name="author" content="Les Petits Plats">
-  <meta name="keywords" content="recettes, cuisine, recherche recettes, ingrédients">
-  
-  <!-- Open Graph (partage réseaux sociaux) -->
-  <meta property="og:title" content="Les Petits Plats - Recettes de cuisine">
-  <meta property="og:description" content="Trouvez rapidement la recette parfaite">
-  <meta property="og:type" content="website">
-  
-  <title>Les Petits Plats - Recherche de recettes</title>
-  
-  <!-- Tailwind CSS -->
-  <link rel="stylesheet" href="css/output.css">
-</head>
-  <body></body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Les Petits Plats - Trouvez rapidement la recette parfaite parmi nos 50 recettes de cuisine"
+    />
+    <meta name="author" content="Les Petits Plats" />
+    <meta
+      name="keywords"
+      content="recettes, cuisine, recherche recettes, ingrédients"
+    />
+
+    <!-- Open Graph (partage réseaux sociaux) -->
+    <meta
+      property="og:title"
+      content="Les Petits Plats - Recettes de cuisine"
+    />
+    <meta
+      property="og:description"
+      content="Trouvez rapidement la recette parfaite"
+    />
+    <meta property="og:type" content="website" />
+
+    <title>Les Petits Plats - Recherche de recettes</title>
+
+    <!-- Tailwind CSS -->
+    <link rel="stylesheet" href="css/output.css" />
+  </head>
+  <body class="bg-light-grey font-sans">
+    <header
+      class="relative bg-cover bg-center h-[667px]"
+      style="
+        background-image: url('images/background/benoit-deschasaux-60WT-38Mrwo-unsplash.jpg');
+      "
+    >
+      <div
+        class="relative z-10 container mx-auto px-4 py-8 h-full flex flex-col justify-center items-center text-center"
+      >
+        <!-- Logo -->
+        <img
+          src="images/logo/logo.png"
+          alt="Les Petits Plats"
+          class="h-16 md:h-20 mb-6"
+        />
+
+        <!-- Phrase d'accroche avec couleur custom -->
+        <h1
+          class="text-3xl md:text-4xl lg:text-[44px] font-normal mb-4 text-primary-yellow"
+        >
+          CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, <br />
+          SIMPLES ET DÉLICIEUSES
+        </h1>
+
+        <!-- Barre de recherche principale -->
+        <div class="w-full max-w-3xl">
+          <div class="relative">
+            <input
+              type="text"
+              id="main-search"
+              placeholder="Rechercher une recette, un ingrédient, ..."
+              class="w-full bg-white px-6 py-4 pr-20 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-primary-yellow shadow-lg"
+            />
+
+            <!-- Bouton de recherche -->
+            <button
+              type="button"
+              id="search-button"
+              aria-label="Lancer la recherche"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black rounded-md p-3 flex items-center justify-center hover:bg-gray-800 active:bg-gray-900 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-yellow"
+            >
+              <svg
+                class="w-[20px] h-[20px] text-white pointer-events-none"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                ></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main content -->
+    <main>
+      <!-- On va créer ça après -->
+    </main>
+
+    <!-- Scripts JavaScript (à la fin du body) -->
+    <script type="module" src="js/main.js"></script>
+  </body>
 </html>
