@@ -24,6 +24,8 @@
     />
     <meta property="og:type" content="website" />
 
+    <link rel="icon" href="/favicon.png" type="image/png" sizes="32x32" />
+
     <title>Les Petits Plats - Recherche de recettes</title>
 
     <!-- Tailwind CSS -->
@@ -33,7 +35,7 @@
     <header
       class="relative bg-cover bg-center h-[667px]"
       style="
-        background-image: url('images/background/benoit-deschasaux-60WT-38Mrwo-unsplash.jpg');
+        background-image: url('./images/background/benoit-deschasaux-60WT-38Mrwo-unsplash.jpg');
       "
     >
       <div
@@ -51,7 +53,7 @@
 
         <!-- Phrase d'accroche -->
         <h1
-          class="text-3xl md:text-4xl lg:text-[44px] font-normal mb-4 font-display text-primary-yellow"
+          class="text-3xl md:text-4xl lg:text-[44px] font-normal mb-4 font-family-display text-primary-yellow"
         >
           CHERCHEZ PARMI PLUS DE 1500 RECETTES DU QUOTIDIEN, <br />
           SIMPLES ET DÉLICIEUSES
@@ -72,10 +74,10 @@
               type="button"
               id="search-button"
               aria-label="Lancer la recherche"
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black rounded-md p-3 flex items-center justify-center hover:bg-gray-800 active:bg-gray-900 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-yellow"
+              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black rounded-md p-3 flex items-center justify-center hover:bg-primary-yellow active:bg-primary-yellow transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-yellow"
             >
               <svg
-                class="w-[20px] h-[20px] text-white pointer-events-none"
+                class="w-[25px] h-[25px] text-white pointer-events-none"
                 fill="none"
                 stroke="currentColor"
                 stroke-width="2"
@@ -93,12 +95,110 @@
       </div>
     </header>
 
-    <!-- Main content -->
-    <main>
-      <!-- On va créer ça après -->
+    <!-- Main -->
+    <main class="container mx-auto px-4 py-12">
+      <section class="filters mb-12">
+        <!--dropdowns x 3 -->
+        <!-- tags -->
+      </section>
+
+      <section
+        id="recipes-container"
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+      >
+        <article
+          class="bg-card-bg rounded-lg shadow-md overflow-hidden max-w-[380px] border-4 border-transparent hover:border-primary-yellow hover:shadow-xl transition-all duration-300 cursor-pointer"
+        >
+          <!-- Contenu de la carte -->
+
+          <!-- Image avec badge temps -->
+          <div class="relative">
+            <img
+              src="./images/Recette01.jpg"
+              alt="Limonade de Coco"
+              class="w-full h-[253px] object-cover"
+            />
+            <!-- Badge temps en haut à droite -->
+            <span
+              class="absolute top-4 right-4 bg-primary-yellow text-text-black px-4 py-2 rounded-md text-sm font-normal font-family-sans"
+            >
+              10min
+            </span>
+          </div>
+
+          <!-- Contenu de la carte -->
+          <div class="p-6">
+            <!-- Titre de la recette -->
+            <h3
+              class="font-family-display text-lg font-normal text-text-black mb-6"
+            >
+              Limonade de Coco
+            </h3>
+
+            <!-- Section RECETTE -->
+            <div class="mb-6">
+              <h4 class="text-text-grey text-xs font-bold uppercase mb-3">
+                Recette
+              </h4>
+              <p class="text-text-black text-sm line-clamp-6">
+                Mettre les glaçons à votre goût dans le blender, ajouter le
+                lait, la crème de coco, le jus de 2 citrons et le sucre. Mixer
+                jusqu'à avoir la consistance désirée.
+              </p>
+            </div>
+
+            <!-- Section INGRÉDIENTS -->
+            <div>
+              <h4
+                class="text-text-grey text-xs font-bold uppercase tracking-wide mb-3"
+              >
+                Ingrédients
+              </h4>
+
+              <!-- Grille 2 colonnes qui s'adapte au nombre d'ingrédients -->
+              <div class="grid grid-cols-2 gap-x-4 gap-y-3">
+                <!-- Ingrédient 1 -->
+                <div>
+                  <p class="text-text-black text-sm font-medium">
+                    Lait de coco
+                  </p>
+                  <p class="text-text-grey text-xs">400ml</p>
+                </div>
+
+                <!-- Ingrédient 2 -->
+                <div>
+                  <p class="text-text-black text-sm font-medium">
+                    Jus de citron
+                  </p>
+                  <p class="text-text-grey text-xs">2</p>
+                </div>
+
+                <!-- Ingrédient 3 -->
+                <div>
+                  <p class="text-text-black text-sm font-medium">
+                    Crème de coco
+                  </p>
+                  <p class="text-text-grey text-xs">2 cuillères à soupe</p>
+                </div>
+
+                <!-- Ingrédient 4 -->
+                <div>
+                  <p class="text-text-black text-sm font-medium">Sucre</p>
+                  <p class="text-text-grey text-xs">30g</p>
+                </div>
+
+                <!-- Ingrédient 5 -->
+                <div>
+                  <p class="text-text-black text-sm font-medium">Glaçons</p>
+                  <p class="text-text-grey text-xs">Oui</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
     </main>
 
-    <!-- Scripts JavaScript (à la fin du body) -->
     <script type="module" src="js/main.js"></script>
   </body>
 </html>
