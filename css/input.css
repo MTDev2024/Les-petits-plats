@@ -26,6 +26,7 @@
   --color-light-grey: #ededed;
   --color-card-bg: #ffffff;
   --color-text-grey: #7a7a7a;
+  /* --color-text-grey: #6B7280;  Tailwind gray-500 pour accessibilité et contraste adapté */
   --color-text-black: #000000;
   --color--black: #1b1b1b;
 

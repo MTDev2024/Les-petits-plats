@@ -1,16 +1,15 @@
 import recipes from './data/recipes.js';
 import { createRecipeCard } from './components/recipeCard.js';
 
-function displayRecipes(recipesToShow) {
-  const container = document.getElementById('recipes-container');
-  container.innerHTML = '';
+const recipesContainer = document.querySelector('#recipes-container');
 
-  recipesToShow.forEach((recipe) => {
+function displayRecipes(list) {
+  recipesContainer.innerHTML = '';
+  list.forEach((recipe) => {
     const card = createRecipeCard(recipe);
-    container.appendChild(card);
+    recipesContainer.appendChild(card);
   });
 }
 
-document.addEventListener('DOMContentLoaded', () => {
-  displayRecipes(recipes);
-});
+console.log('main.js chargé — nombre de recettes :', recipes.length);
+displayRecipes(recipes);
