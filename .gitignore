@@ -66,8 +66,8 @@ node_modules/
 # ========================================
 # Fichier CSS généré automatiquement par Tailwind
 # (Ne pas versionner car régénéré à chaque build)
-css/output.css
-css/output.css.map
+# css/output.css
+# css/output.css.map
 
 # ========================================
 # ENVIRONNEMENT
