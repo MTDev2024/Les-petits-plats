@@ -1,7 +1,5 @@
 # 🍽️ Les Petits Plats
 
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
-![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-yellow.svg)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4.1.14-38B2AC.svg)
 
@@ -246,9 +244,9 @@ Ce projet applique les principes de l'**éco-conception web** :
 
 - [x] Header
 - [ ] Section filtres (dropdowns + tags)
-- [ ] Grid de cartes responsive
-- [ ] Factory `createRecipeCard()`
-- [ ] Validation W3C
+- [x] Grid de cartes responsive
+- [x] Factory `createRecipeCard()`
+- [x] Validation W3C
 
 ### 🚧 Phase 3 - Algorithmes (Semaine 2-3)
 
