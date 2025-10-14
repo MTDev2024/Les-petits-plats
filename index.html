@@ -30,76 +30,77 @@
 
     <!-- Tailwind CSS -->
     <link rel="stylesheet" href="css/output.css" />
-    
-
   </head>
   <body class="bg-light-grey font-sans">
-    <header
-      class="relative bg-cover bg-center h-[667px]"
-      style="
-        background-image: url('./images/background/f90e7bb5ff2950597c1f7f1fce40bd5b03a3d836.jpg');
-      "
-    >
-      <div
-        class="relative z-10 container mx-auto px-4 py-8 h-full flex flex-col justify-center items-center text-center"
-      >
-        <div
-          class="flex justify-center md:block md:absolute md:top-8 md:left-8 mb-6 md:mb-0"
+   <header
+  class="header relative bg-cover bg-center h-[667px] bg-black"
+  style="background-image: url('./images/background/f90e7bb5ff2950597c1f7f1fce40bd5b03a3d836.jpg');"
+>
+  <div
+    class="header__container relative z-10 container mx-auto px-4 py-8 h-full flex flex-col justify-center items-center text-center"
+  >
+    <!-- Logo -->
+    <div class="header__logo-wrapper flex justify-center md:block md:absolute md:top-8 md:left-8 mb-6 md:mb-0">
+      <img
+        src="images/logo/logo.png"
+        alt="Les Petits Plats"
+        class="header__logo w-32 md:w-[350px] lg:w-[180px] h-auto sm:w-[300px]"
+      />
+    </div>
+
+    <!-- Phrase d'accroche -->
+    <h1 class="header__title text-3xl md:text-4xl lg:text-[44px] font-normal mb-4 font-family-display text-primary-yellow">
+      CHERCHEZ PARMI PLUS DE 1500 RECETTES <br />
+      DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
+    </h1>
+
+    <!-- Barre de recherche principale -->
+    <div class="search-bar w-full max-w-[70%]">
+      <div class="search-bar__wrapper relative">
+        <!-- Label accessible caché -->
+        <label for="main-search" class="sr-only">Rechercher une recette</label>
+
+        <!-- Input principal -->
+        <input
+          type="text"
+          id="main-search"
+          placeholder="Rechercher une recette, un ingrédient, ..."
+          class="search-bar__input w-full bg-white px-6 py-4 pr-20 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-primary-yellow shadow-lg"
+        />
+
+        <!-- Bouton de recherche -->
+        <button
+          type="button"
+          id="search-button"
+          aria-label="Lancer la recherche"
+          class="search-bar__button absolute right-2 top-1/2 transform -translate-y-1/2 bg-black rounded-md p-3 flex items-center justify-center hover:bg-primary-yellow active:bg-primary-yellow transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-yellow"
         >
-          <img
-            src="images/logo/logo.png"
-            alt="Les Petits Plats"
-            class="w-32 md:w-[350px] lg:w-[180px] h-auto sm:w-[300px]"
-          />
-        </div>
-
-        <!-- Phrase d'accroche -->
-        <h1
-          class="text-3xl md:text-4xl lg:text-[44px] font-normal mb-4 font-family-display text-primary-yellow"
-        >
-          CHERCHEZ PARMI PLUS DE 1500 RECETTES <br />
-          DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
-        </h1>
-
-        <!-- Barre de recherche principale -->
-        <div class="w-full max-w-[70%]">
-          <div class="relative">
-            <input
-              type="text"
-              id="main-search"
-              placeholder="Rechercher une recette, un ingrédient, ..."
-              class="w-full bg-white px-6 py-4 pr-20 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-primary-yellow shadow-lg"
-            />
-
-            <!-- Bouton de recherche -->
-            <button
-              type="button"
-              id="search-button"
-              aria-label="Lancer la recherche"
-              class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black rounded-md p-3 flex items-center justify-center hover:bg-primary-yellow active:bg-primary-yellow transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary-yellow"
-            >
-              <svg
-                class="w-[25px] h-[25px] text-white pointer-events-none"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                ></path>
-              </svg>
-            </button>
-          </div>
-        </div>
+          <svg
+            class="search-bar__icon w-[25px] h-[25px] text-white pointer-events-none"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            ></path>
+          </svg>
+        </button>
       </div>
-    </header>
+    </div>
+  </div>
+</header>
+
 
     <!-- Main -->
     <main class="container mx-auto px-4 py-12 max-w-[1250px]">
+      <!-- Filtres -->
       <section class="filters mb-12">
+        <h2 class="sr-only">Filtres de recherche</h2>
+
         <!--dropdown 1 -->
         <el-dropdown class="inline-block">
           <button
@@ -153,10 +154,11 @@
             </div>
           </el-menu>
         </el-dropdown>
-
       </section>
-      <!-- tags -->
+
+      <!-- Tags -->
       <section class="pb-12">
+        <h2 class="sr-only">Tags sélectionnés</h2>
         <div
           class="tag-element bg-primary-yellow w-[10%] rounded-md justify-between font-family-sans font-normal flex"
         >
@@ -168,47 +170,58 @@
       <!-- Template - Recipe Card -->
       <template id="recipe-card-template">
         <article
-          class="bg-card-bg rounded-lg overflow-hidden max-w-[380px] border-4 border-transparent hover:border-primary-yellow cursor-pointer flex flex-col"
+          class="recipe-card bg-card-bg rounded-lg overflow-hidden max-w-[380px] border-4 border-transparent hover:border-primary-yellow cursor-pointer flex flex-col"
         >
-          <div class="relative">
-            <img src="" alt="" class="w-full h-[253px] object-cover" />
+          <div class="recipe-card__image-wrapper relative">
+            <img
+              src=""
+              alt=""
+              class="recipe-card__image w-full h-[253px] object-cover"
+            />
             <span
-              class="absolute top-4 right-4 bg-primary-yellow text-text-black px-4 py-2 rounded-md text-sm font-normal font-family-sans"
+              class="recipe-card__badge absolute top-4 right-4 bg-primary-yellow text-text-black px-4 py-2 rounded-md text-sm font-normal font-family-sans"
             ></span>
           </div>
 
-          <div class="p-6 flex flex-col flex-1">
+          <div class="recipe-card__content p-6 flex flex-col flex-1">
             <h3
-              class="font-family-display text-lg font-normal text-text-black mb-6"
+              class="recipe-card__title font-family-display text-lg font-normal text-text-black mb-6"
             ></h3>
 
             <!-- Recette -->
-            <div class="flex-1 mb-6">
+            <div
+              class="recipe-card__section recipe-card__section--description flex-1 mb-6"
+            >
               <h4 class="text-text-grey text-xs font-bold uppercase mb-3">
                 Recette
               </h4>
-              <p class="text-text-black text-sm line-clamp-6"></p>
+              <p
+                class="recipe-card__description text-text-black text-sm line-clamp-6"
+              ></p>
             </div>
 
             <!-- Ingrédients -->
-            <div>
+            <div class="recipe-card__section recipe-card__section--ingredients">
               <h4
                 class="text-text-grey text-xs font-bold uppercase tracking-wide mb-3"
               >
                 Ingrédients
               </h4>
-              <div class="grid grid-cols-2 gap-x-4 gap-y-3"></div>
+              <div
+                class="recipe-card__ingredients-grid grid grid-cols-2 gap-x-4 gap-y-3"
+              ></div>
             </div>
           </div>
         </article>
       </template>
 
-      <!-- Conteneur  -->
-
+      <!-- Conteneur des recettes -->
       <section
         id="recipes-container"
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-8"
-      ></section>
+      >
+        <h2 class="sr-only">Liste des recettes</h2>
+      </section>
     </main>
 
     <script type="module" src="js/main.js"></script>
