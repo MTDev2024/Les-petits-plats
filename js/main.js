@@ -11,5 +11,5 @@ function displayRecipes(list) {
   });
 }
 
-console.log('main.js chargé — nombre de recettes :', recipes.length);
+// console.log('main.js chargé — nombre de recettes :', recipes.length);
 displayRecipes(recipes);
