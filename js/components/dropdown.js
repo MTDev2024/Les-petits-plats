@@ -43,53 +43,49 @@ document.addEventListener('click', () => {
   closeAllDropdowns();
 });
 
-
-
-
 // == AFFICHAGE DES LISTES DANS LES DROPDOWNS
 // Import données
-import recipes from "../data/recipes.js";
+import recipes from '../data/recipes.js';
 
 // --- Sélection des conteneurs du DOM ---
-const ingredientsList = document.querySelector(".ingredients-dropdown__list");
-const appliancesList = document.querySelector(".appliances-dropdown__list");
-const ustensilsList = document.querySelector(".ustensils-dropdown__list");
+const ingredientsList = document.querySelector('.ingredients-dropdown__list');
+const appliancesList = document.querySelector('.appliances-dropdown__list');
+const ustensilsList = document.querySelector('.ustensils-dropdown__list');
 
 // --- Extraction / dédoublonnage données ---
 function getUniqueIngredients(recipes) {
   const ingredientsSet = new Set();
-  recipes.forEach(recipe => {
-    recipe.ingredients.forEach(item => ingredientsSet.add(item.ingredient));
+  recipes.forEach((recipe) => {
+    recipe.ingredients.forEach((item) => ingredientsSet.add(item.ingredient));
   });
   return Array.from(ingredientsSet).sort();
 }
 
 function getUniqueAppliances(recipes) {
   const appliancesSet = new Set();
-  recipes.forEach(recipe => appliancesSet.add(recipe.appliance));
+  recipes.forEach((recipe) => appliancesSet.add(recipe.appliance));
   return Array.from(appliancesSet).sort();
 }
 
 function getUniqueUstensils(recipes) {
   const ustensilsSet = new Set();
-  recipes.forEach(recipe => {
-    recipe.ustensils.forEach(u => ustensilsSet.add(u));
+  recipes.forEach((recipe) => {
+    recipe.ustensils.forEach((u) => ustensilsSet.add(u));
   });
   return Array.from(ustensilsSet).sort();
 }
 
 // --- Injection ---
 function fillDropdown(listElement, items) {
+  listElement.innerHTML = '';
 
-  listElement.innerHTML = "";
-
-  items.forEach(item => {
-    const li = document.createElement("li");
-    const button = document.createElement("button");
+  items.forEach((item) => {
+    const li = document.createElement('li');
+    const button = document.createElement('button');
 
     button.className =
-      "w-full text-left p-4 font-family-sans text-sm text-text-black font-normal hover:bg-primary-yellow focus:bg-primary-yellow focus:outline-none";
-    button.setAttribute("role", "menuitem");
+      'w-full text-left p-4 font-family-sans text-sm text-text-black font-normal hover:bg-primary-yellow focus:bg-primary-yellow focus:outline-none';
+    button.setAttribute('role', 'menuitem');
     button.textContent = item;
 
     li.appendChild(button);
@@ -109,4 +105,4 @@ function initDropdowns() {
 }
 
 // --- Initialisation ---
-document.addEventListener("DOMContentLoaded", initDropdowns);
+document.addEventListener('DOMContentLoaded', initDropdowns);
