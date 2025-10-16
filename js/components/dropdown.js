@@ -1,53 +1,44 @@
-// Sélection boutons dropdown
 const dropdownToggles = document.querySelectorAll('.dropdown__toggle');
 
-// === Fermeture des menus ouverts ===
 function closeAllDropdowns() {
   document.querySelectorAll('.dropdown__menu').forEach((menu) => {
     menu.classList.add('hidden');
   });
+
   document.querySelectorAll('.dropdown__toggle').forEach((button) => {
     button.setAttribute('aria-expanded', 'false');
   });
 }
 
-// === GESTION PRINCIPALE : ouverture / fermeture des dropdowns ===
+// Action au clic
 dropdownToggles.forEach((toggle, index) => {
-  const dropdownMenu = toggle.nextElementSibling;
+  const dropdownMenu = toggle.nextElementSibling; // menu juste après le bouton dans le HTML
 
-  // Ajout ID à chaque menu si pas déjà présent
+  // === ASSIGNATION ID POUR ACCESSIBILITÉ ===
   if (!dropdownMenu.id) {
-    dropdownMenu.id = `dropdown-menu-${index}`;
+    dropdownMenu.id = `dropdown-menu-${index}`; // id unique si pas déjà défini
   }
+  toggle.setAttribute('aria-controls', dropdownMenu.id); // relie le bouton au menu
 
-  // Création lien bouton / menu
-  toggle.setAttribute('aria-controls', dropdownMenu.id);
-
-  // === Clic bouton ===
   toggle.addEventListener('click', (e) => {
-    e.stopPropagation(); // empêche la fermeture immédiate quand on clique sur le bouton
+    e.stopPropagation(); // empêche le clic de "remonter" au document
 
-    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+    const isOpen = toggle.getAttribute('aria-expanded') === 'true'; // vérifie si menu déjà ouvert
 
-    // Fermeture de tous les dropdowns avant d’en ouvrir un autre
-    closeAllDropdowns();
+    closeAllDropdowns(); // ferme tous les menus avant d’en ouvrir un autre
 
-    // Si pas déjà ouvert, ouvrir
     if (!isOpen) {
-      toggle.setAttribute('aria-expanded', 'true');
-      dropdownMenu.classList.remove('hidden');
+      toggle.setAttribute('aria-expanded', 'true'); // indique menu ouvert
+      dropdownMenu.classList.remove('hidden'); // affiche menu
+
+      // Focus 1er élément de la liste
+      const firstItem = dropdownMenu.querySelector('li > button, li > a');
+      if (firstItem) firstItem.focus();
     }
   });
 });
 
-// === Fermeture au clic extérieur ===
+// Fermeture dropdowns si clic extérieur
 document.addEventListener('click', () => {
   closeAllDropdowns();
-});
-
-// === Fermeture avec Echap ===
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
-    closeAllDropdowns();
-  }
 });
