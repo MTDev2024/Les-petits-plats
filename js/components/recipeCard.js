@@ -1,4 +1,4 @@
-// On exporte la fonction pour qu’elle puisse être utilisée ailleurs dans le projet
+// Export fonction pour utiliser partout
 export function createRecipeCard(recipe) {
   // Récupération template HTML
   const template = document.querySelector('#recipe-card-template');
@@ -18,7 +18,7 @@ export function createRecipeCard(recipe) {
   ); // grille d’ingrédients
 
   // === ACCESSIBILITÉ ===
-  // Ajout identifiants uniques pour lecteurs d’écran
+  // Ajout id pour lecteurs d’écran
   article.id = `recipe-${recipe.id}`;
   title.id = `recipe-${recipe.id}-title`;
   recipeText.id = `recipe-${recipe.id}-desc`;

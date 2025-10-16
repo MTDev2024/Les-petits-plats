@@ -1,7 +1,7 @@
 // Sélection boutons dropdown
 const dropdownToggles = document.querySelectorAll('.dropdown__toggle');
 
-// Fermeture des menus ouverts
+// === Fermeture des menus ouverts ===
 function closeAllDropdowns() {
   document.querySelectorAll('.dropdown__menu').forEach((menu) => {
     menu.classList.add('hidden');
@@ -11,17 +11,25 @@ function closeAllDropdowns() {
   });
 }
 
-// Fonction principale : ouverture / fermeture des dropdowns
-dropdownToggles.forEach((toggle) => {
+// === GESTION PRINCIPALE : ouverture / fermeture des dropdowns ===
+dropdownToggles.forEach((toggle, index) => {
   const dropdownMenu = toggle.nextElementSibling;
 
-  // Clic sur le bouton
+  // Ajout ID à chaque menu si pas déjà présent
+  if (!dropdownMenu.id) {
+    dropdownMenu.id = `dropdown-menu-${index}`;
+  }
+
+  // Création lien bouton / menu
+  toggle.setAttribute('aria-controls', dropdownMenu.id);
+
+  // === Clic bouton ===
   toggle.addEventListener('click', (e) => {
-    e.stopPropagation(); // empêche la fermeture immédiate
+    e.stopPropagation(); // empêche la fermeture immédiate quand on clique sur le bouton
 
     const isOpen = toggle.getAttribute('aria-expanded') === 'true';
 
-    // Fermer dropdowns avant d’en ouvrir un autre
+    // Fermeture de tous les dropdowns avant d’en ouvrir un autre
     closeAllDropdowns();
 
     // Si pas déjà ouvert, ouvrir
@@ -32,7 +40,14 @@ dropdownToggles.forEach((toggle) => {
   });
 });
 
-// Clic en dehors -> fermer dropdowns
+// === Fermeture au clic extérieur ===
 document.addEventListener('click', () => {
   closeAllDropdowns();
+});
+
+// === Fermeture avec Echap ===
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeAllDropdowns();
+  }
 });
