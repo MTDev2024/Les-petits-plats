@@ -49,8 +49,8 @@ import recipes from '../data/recipes.js';
 
 // --- Sélection des conteneurs du DOM ---
 const ingredientsList = document.querySelector('.ingredients-dropdown__list');
-const appliancesList = document.querySelector('.appliances-dropdown__list');
-const ustensilsList = document.querySelector('.ustensils-dropdown__list');
+const appliancesList = document.querySelector('.appareils-dropdown__list');
+const ustensilsList = document.querySelector('.ustensiles-dropdown__list');
 
 // --- Extraction / dédoublonnage données ---
 function getUniqueIngredients(recipes) {
