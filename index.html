@@ -106,7 +106,7 @@
     <!-- Main -->
     <main class="container mx-auto px-4 py-12 max-w-[1250px]">
       <!-- Filtres -->
-      <section class="filters flex justify-between mb-4 ">
+      <section class="filters flex justify-between mb-4">
         <h2 class="sr-only">Filtres de recherche</h2>
         <div class="dropdowns">
           <!-- Dropdown Ingrédients -->
@@ -167,10 +167,8 @@
 
               <!-- Liste des ingrédients -->
               <ul
-                class="ingredients-dropdown__list space-y-1 max-h-48 overflow-y-auto bg-white rounded-b-md"
-              >
-                
-              </ul>
+                class="ingredients-dropdown__list max-h-48 overflow-y-auto bg-white rounded-b-md"
+              ></ul>
             </div>
           </div>
 
@@ -233,7 +231,7 @@
 
               <!-- Liste des appareils -->
               <ul
-                class="appareils-dropdown__list space-y-1 max-h-48 overflow-y-auto bg-white"
+                class="appareils-dropdown__list max-h-48 overflow-y-auto bg-white"
               >
                 <li>
                   <button
@@ -306,7 +304,7 @@
 
               <!-- Liste des ustensiles -->
               <ul
-                class="ustensiles-dropdown__list space-y-1 max-h-48 overflow-y-auto bg-white rounded-b-md"
+                class="ustensiles-dropdown__list max-h-48 overflow-y-auto bg-white rounded-b-md"
               >
                 <li>
                   <button
@@ -331,12 +329,22 @@
       <!-- Tags -->
       <section class="tags-display pb-12">
         <h2 class="sr-only">Mots-clés sélectionnés</h2>
-        <div
-          class="tag-element bg-primary-yellow w-[10%] rounded-md justify-between font-family-sans font-normal flex"
+        <!-- Tag -->
+        <button
+          type="button"
+          class="tag-element bg-primary-yellow cursor-pointer rounded-md inline-flex items-center gap-2 font-sans font-normal px-3 py-1.5 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
+          data-tag="spatule"
+          aria-label="Supprimer le tag Spatule"
         >
-          <div class="tag-name p-3">Spatule</div>
-          <span class="tag-close p-3">X</span>
-        </div>
+          Spatule
+          <img
+            src="images/icons/vector.png"
+            alt=""
+            aria-hidden="true"
+            class="w-[12px] h-[12px] pl-1"
+          />
+        </button>
+        <!--Fin Tag -->
       </section>
 
       <!-- Template - Recipe Card -->
