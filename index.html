@@ -108,12 +108,13 @@
       <!-- Filtres -->
       <section class="filters flex justify-between mb-4">
         <h2 class="sr-only">Filtres de recherche</h2>
-        <div class="dropdowns">
+
+        <div class="dropdowns flex gap-12">
           <!-- Dropdown Ingrédients -->
-          <div class="ingredients-dropdown inline-block relative">
+          <div class="ingredients-dropdown  ">
             <!-- Bouton principal -->
             <button
-              class="dropdown__toggle flex items-center justify-between w-56 bg-white px-4 py-2 rounded-md font-semibold text-gray-800 shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-yellow"
+              class="dropdown__toggle flex items-center justify-between w-56 bg-white px-4 py-2 rounded-md font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-yellow" 
               aria-expanded="false"
               aria-controls="dropdown-ingredients"
             >
@@ -137,10 +138,10 @@
             <!-- Contenu du menu -->
             <div
               id="dropdown-ingredients"
-              class="dropdown__menu hidden absolute w-56 bg-white z-10 rounded-md shadow-lg"
+              class="dropdown__menu hidden absolute w-56 bg-white z-10 rounded-md"
             >
               <!-- Barre de recherche -->
-              <div class="dropdown__search-bar relative mb-3 border-b">
+              <div class="dropdown__search-bar relative border">
                 <label for="ingredients-search" class="sr-only"
                   >Rechercher un ingrédient</label
                 >
@@ -148,7 +149,7 @@
                   type="text"
                   id="ingredients-search"
                   placeholder="Rechercher..."
-                  class="dropdown__search w-full bg-gray-50 px-3 py-2 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-t-md"
+                  class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md"
                 />
                 <svg
                   class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
@@ -167,16 +168,16 @@
 
               <!-- Liste des ingrédients -->
               <ul
-                class="ingredients-dropdown__list max-h-48 overflow-y-auto bg-white rounded-b-md"
+                class="ingredients-dropdown__list max-h-48 overflow-y-auto bg-white"
               ></ul>
             </div>
           </div>
 
           <!-- Dropdown Appareils -->
-          <div class="appareils-dropdown inline-block relative">
+          <div class="appareils-dropdown  ">
             <!-- Bouton principal -->
             <button
-              class="dropdown__toggle flex items-center justify-between w-56 bg-white px-4 py-2 rounded-md font-semibold text-gray-800 shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-yellow"
+              class="dropdown__toggle flex items-center justify-between w-56 bg-white px-4 py-2 rounded-md font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-yellow"
               aria-expanded="false"
               aria-controls="dropdown-appareils"
             >
@@ -200,11 +201,11 @@
             <!-- Contenu du menu -->
             <div
               id="dropdown-appareils"
-              class="dropdown__menu hidden absolute w-56 h-10 bg-white z-10"
+              class="dropdown__menu hidden absolute w-56 bg-white z-10"
               role="menu"
             >
               <!-- Barre de recherche -->
-              <div class="dropdown__search-bar relative mb-3 border">
+              <div class="dropdown__search-bar relative border">
                 <label for="appareils-search" class="sr-only"
                   >Rechercher un appareil</label
                 >
@@ -212,7 +213,7 @@
                   type="text"
                   id="appareils-search"
                   placeholder="Rechercher..."
-                  class="dropdown__search w-full bg-gray-50 px-3 text-gray-800 text-sm focus:outline-none focus:ring-2"
+                  class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md"
                 />
                 <svg
                   class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
@@ -246,7 +247,7 @@
           </div>
 
           <!-- Dropdown Ustensiles -->
-          <div class="ustensiles-dropdown inline-block relative">
+          <div class="ustensiles-dropdown  relative">
             <!-- Bouton principal -->
             <button
               class="dropdown__toggle flex items-center justify-between w-56 bg-white px-4 py-2 rounded-md font-semibold text-gray-800 shadow-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-yellow"
@@ -273,11 +274,11 @@
             <!-- Contenu du menu -->
             <div
               id="dropdown-ustensiles"
-              class="dropdown__menu hidden absolute w-56 h-10 bg-white z-10"
+              class="dropdown__menu hidden absolute w-56 bg-white z-10"
               role="menu"
             >
               <!-- Barre de recherche -->
-              <div class="dropdown__search-bar relative mb-3 border">
+              <div class="dropdown__search-bar relative border">
                 <label for="ustensiles-search" class="sr-only"
                   >Rechercher un ustensile</label
                 >
@@ -285,7 +286,7 @@
                   type="text"
                   id="ustensiles-search"
                   placeholder="Rechercher..."
-                  class="dropdown__search w-full bg-gray-50 px-3 text-gray-800 text-sm focus:outline-none focus:ring-2"
+                  class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md"
                 />
                 <svg
                   class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
