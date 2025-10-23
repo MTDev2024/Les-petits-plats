@@ -17,7 +17,6 @@ function normalizeString(str) {
 }
 
 // -- AJOUT D'UN TAG
-
 function addTag(tagName, type) {
   // Vérification si tag existe déjà (éviter doublons)
   const existingTag = tagsDisplay.querySelector('[data-tag="' + tagName + '"]');
@@ -59,7 +58,6 @@ function addTag(tagName, type) {
 }
 
 // -- SUPPRESSION D'UN TAG
-
 function removeTag(tagButton, type, tagName) {
   // Supprime le bouton du DOM
   tagButton.remove();
@@ -205,7 +203,6 @@ document.addEventListener('recipesFiltered', function (e) {
 });
 
 // -- DROPDOWNS OUVERTURE / FERMETURE
-
 const dropdownToggles = document.querySelectorAll('.dropdown__toggle');
 
 // Gestion clic boutons dropdown

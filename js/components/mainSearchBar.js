@@ -10,13 +10,15 @@ window.filteredRecipes = recipes; // recettes filtrées après tous les filtres
 window.activeTags = []; // tags actifs {type, value}
 window.mainSearchKeyword = ''; // mot-clé barre principale
 
-// === NORMALISATION SAISIE
+// -- NORMALISATION SAISIE
 function normalizeString(str) {
   return str
     .toLowerCase() // tout en minuscules
     .normalize('NFD') // sépare lettres et accents
     .replace(/[\u0300-\u036f]/g, ''); // supprime accents
 }
+
+// -- AFFICHAGE CONSIGNE UTILISATEUR
 
 // -- AFFICHAGE MESSAGE D'ERREUR
 
@@ -39,7 +41,7 @@ function displayNoResultsMessage(show, searchTerm) {
 
 // -- FILTRAGE COMPLET (BARRE + TAGS)
 
-// Application des filtres
+// Application filtres
 // 1. Filtre barre principale
 // 2. Filtre tags actifs (intersection)
 function applyAllFilters() {
@@ -196,14 +198,8 @@ function applyAllFilters() {
   );
 }
 
-// -- FONCTION PUBLIQUE RÉAPPLIQUER LES FILTRES
+// -- FONCTION GLOBALE RÉAPPLIQUER LES FILTRES
 // Fonction appelée depuis dropdown.js
-window.reapplyFilters = function () {
-  applyAllFilters();
-};
-
-// === FONCTION PUBLIQUE POUR RÉAPPLIQUER LES FILTRES
-// Cette fonction est appelée depuis dropdown.js
 window.reapplyFilters = function () {
   applyAllFilters();
 };
