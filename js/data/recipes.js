@@ -2,7 +2,7 @@ const recipes = [
   {
     id: 1,
     image: 'Recette01.jpg',
-    name: 'Limonade de Coco',
+    name: 'Limonade de coco',
     servings: 1,
     ingredients: [
       {
@@ -62,7 +62,7 @@ const recipes = [
         quantity: 5,
       },
       {
-        ingredient: 'Lait de Coco',
+        ingredient: 'Lait de coco',
         quantity: 100,
         unit: 'ml',
       },
