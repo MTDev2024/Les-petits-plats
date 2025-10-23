@@ -1,108 +1,347 @@
-const dropdownToggles = document.querySelectorAll('.dropdown__toggle');
+// dropdown.js
+// Gestion des dropdowns, tags et mise à jour des listes
+// Mode classique : if, for, else
 
-function closeAllDropdowns() {
-  document.querySelectorAll('.dropdown__menu').forEach((menu) => {
-    menu.classList.add('hidden');
-  });
-
-  document.querySelectorAll('.dropdown__toggle').forEach((button) => {
-    button.setAttribute('aria-expanded', 'false');
-  });
-}
-
-// Action au clic
-dropdownToggles.forEach((toggle, index) => {
-  const dropdownMenu = toggle.nextElementSibling; // menu juste après le bouton dans le HTML
-
-  // === ASSIGNATION ID POUR ACCESSIBILITÉ ===
-  if (!dropdownMenu.id) {
-    dropdownMenu.id = `dropdown-menu-${index}`; // id unique si pas déjà défini
-  }
-  toggle.setAttribute('aria-controls', dropdownMenu.id); // relie le bouton au menu
-
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation(); // empêche le clic de "remonter" au document
-
-    const isOpen = toggle.getAttribute('aria-expanded') === 'true'; // vérifie si menu déjà ouvert
-
-    closeAllDropdowns(); // ferme tous les menus avant d’en ouvrir un autre
-
-    if (!isOpen) {
-      toggle.setAttribute('aria-expanded', 'true'); // indique menu ouvert
-      dropdownMenu.classList.remove('hidden'); // affiche menu
-
-      // Focus 1er élément de la liste
-      const firstItem = dropdownMenu.querySelector('li > button, li > a');
-      if (firstItem) firstItem.focus();
-    }
-  });
-});
-
-// Fermeture dropdowns si clic extérieur
-document.addEventListener('click', () => {
-  closeAllDropdowns();
-});
-
-// == AFFICHAGE DES LISTES DANS LES DROPDOWNS
-// Import données
-import recipes from '../data/recipes.js';
-
-// --- Sélection des conteneurs du DOM ---
+// ================================
+// === SÉLECTION DES ÉLÉMENTS
+// ================================
 const ingredientsList = document.querySelector('.ingredients-dropdown__list');
 const appliancesList = document.querySelector('.appareils-dropdown__list');
 const ustensilsList = document.querySelector('.ustensiles-dropdown__list');
+const tagsDisplay = document.querySelector('.tags-display');
 
-// --- Extraction / dédoublonnage données ---
-function getUniqueIngredients(recipes) {
-  const ingredientsSet = new Set();
-  recipes.forEach((recipe) => {
-    recipe.ingredients.forEach((item) => ingredientsSet.add(item.ingredient));
+// ================================
+// === NORMALISATION
+// ================================
+function normalizeString(str) {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '');
+}
+
+// ================================
+// === AJOUT D'UN TAG
+// ================================
+function addTag(tagName, type) {
+  // Vérifie si le tag existe déjà (évite les doublons)
+  const existingTag = tagsDisplay.querySelector('[data-tag="' + tagName + '"]');
+  if (existingTag) return;
+
+  // Crée le bouton tag
+  const tagButton = document.createElement('button');
+  tagButton.type = 'button';
+  tagButton.className =
+    'tag-element bg-primary-yellow cursor-pointer rounded-md inline-flex items-center gap-2 px-3 py-1.5 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500';
+  tagButton.setAttribute('data-tag', tagName);
+  tagButton.setAttribute('aria-label', 'Supprimer le tag ' + tagName);
+
+  const tagText = document.createElement('span');
+  tagText.textContent = tagName;
+
+  const tagIcon = document.createElement('img');
+  tagIcon.src = 'images/icons/vector.png';
+  tagIcon.alt = '';
+  tagIcon.setAttribute('aria-hidden', 'true');
+  tagIcon.className = 'w-[12px] h-[12px] pl-1';
+
+  tagButton.appendChild(tagText);
+  tagButton.appendChild(tagIcon);
+  tagsDisplay.appendChild(tagButton);
+
+  // Ajout aux tags globaux
+  window.activeTags.push({ type: type, value: tagName });
+
+  // Réapplique tous les filtres (barre principale + tags)
+  if (window.reapplyFilters) {
+    window.reapplyFilters();
+  }
+
+  // Suppression du tag au clic
+  tagButton.addEventListener('click', function () {
+    removeTag(tagButton, type, tagName);
   });
-  return Array.from(ingredientsSet).sort();
 }
 
-function getUniqueAppliances(recipes) {
-  const appliancesSet = new Set();
-  recipes.forEach((recipe) => appliancesSet.add(recipe.appliance));
-  return Array.from(appliancesSet).sort();
+// ================================
+// === SUPPRESSION D'UN TAG
+// ================================
+function removeTag(tagButton, type, tagName) {
+  // Supprime le bouton du DOM
+  tagButton.remove();
+
+  // Supprime le tag du tableau global
+  const newTags = [];
+  for (let i = 0; i < window.activeTags.length; i++) {
+    const currentTag = window.activeTags[i];
+    // On garde uniquement les tags différents
+    if (!(currentTag.type === type && currentTag.value === tagName)) {
+      newTags.push(currentTag);
+    }
+  }
+  window.activeTags = newTags;
+
+  // Réapplique tous les filtres
+  if (window.reapplyFilters) {
+    window.reapplyFilters();
+  }
 }
 
-function getUniqueUstensils(recipes) {
-  const ustensilsSet = new Set();
-  recipes.forEach((recipe) => {
-    recipe.ustensils.forEach((u) => ustensilsSet.add(u));
-  });
-  return Array.from(ustensilsSet).sort();
-}
+// ================================
+// === REMPLISSAGE D'UN DROPDOWN
+// ================================
+function fillDropdown(listElement, items, type) {
+  listElement.innerHTML = ''; // vide la liste
 
-// --- Injection ---
-function fillDropdown(listElement, items) {
-  listElement.innerHTML = '';
+  // Si aucun item, affiche un message
+  if (items.length === 0) {
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    span.className = 'block p-4 text-sm text-gray-500 italic';
+    span.textContent = 'Aucun résultat';
+    li.appendChild(span);
+    listElement.appendChild(li);
+    return;
+  }
 
-  items.forEach((item) => {
+  // Crée un bouton pour chaque item
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
     const li = document.createElement('li');
     const button = document.createElement('button');
-
     button.className =
-      'w-full text-left p-4 font-family-sans text-sm text-text-black font-normal hover:bg-primary-yellow focus:bg-primary-yellow focus:outline-none';
-    button.setAttribute('role', 'menuitem');
+      'w-full text-left p-4 text-sm hover:bg-primary-yellow focus:bg-primary-yellow focus:outline-none';
     button.textContent = item;
+    button.setAttribute('role', 'menuitem');
+
+    // Ajout du tag au clic
+    button.addEventListener('click', function () {
+      addTag(item, type);
+    });
 
     li.appendChild(button);
     listElement.appendChild(li);
+  }
+}
+
+// ================================
+// === MISE À JOUR DES DROPDOWNS SELON RECETTES FILTRÉES
+// ================================
+function updateDropdowns(recipesArray) {
+  // Si aucune recette, utilise toutes les recettes
+  if (!recipesArray || recipesArray.length === 0) {
+    recipesArray = window.allRecipes;
+  }
+
+  // Utilise des objets comme "sets" pour éviter les doublons
+  const ingredientsSet = {};
+  const appliancesSet = {};
+  const ustensilsSet = {};
+
+  // Parcours de toutes les recettes filtrées
+  for (let i = 0; i < recipesArray.length; i++) {
+    const recipe = recipesArray[i];
+
+    // Récupère tous les ingrédients
+    for (let j = 0; j < recipe.ingredients.length; j++) {
+      ingredientsSet[recipe.ingredients[j].ingredient] = true;
+    }
+
+    // Récupère l'appareil
+    appliancesSet[recipe.appliance] = true;
+
+    // Récupère tous les ustensiles
+    for (let j = 0; j < recipe.ustensils.length; j++) {
+      ustensilsSet[recipe.ustensils[j]] = true;
+    }
+  }
+
+  // Supprime les items déjà ajoutés comme tags
+  for (let t = 0; t < window.activeTags.length; t++) {
+    const tag = window.activeTags[t];
+    if (tag.type === 'ingredient') {
+      delete ingredientsSet[tag.value];
+    }
+    if (tag.type === 'appliance') {
+      delete appliancesSet[tag.value];
+    }
+    if (tag.type === 'ustensil') {
+      delete ustensilsSet[tag.value];
+    }
+  }
+
+  // Conversion en tableau et tri alphabétique
+  const ingredientsArray = Object.keys(ingredientsSet).sort();
+  const appliancesArray = Object.keys(appliancesSet).sort();
+  const ustensilsArray = Object.keys(ustensilsSet).sort();
+
+  // Remplit les dropdowns
+  fillDropdown(ingredientsList, ingredientsArray, 'ingredient');
+  fillDropdown(appliancesList, appliancesArray, 'appliance');
+  fillDropdown(ustensilsList, ustensilsArray, 'ustensil');
+}
+
+// ================================
+// === FILTRAGE DES DROPDOWNS (BARRES DE RECHERCHE INTERNES)
+// ================================
+function filterDropdownItems(searchInput, listElement, allItems, type) {
+  const keyword = normalizeString(searchInput.value.trim());
+
+  // Si vide, affiche tous les items
+  if (keyword.length === 0) {
+    fillDropdown(listElement, allItems, type);
+    return;
+  }
+
+  // Filtre les items qui contiennent le mot-clé
+  const filtered = [];
+  for (let i = 0; i < allItems.length; i++) {
+    const itemNormalized = normalizeString(allItems[i]);
+    if (itemNormalized.indexOf(keyword) !== -1) {
+      filtered.push(allItems[i]);
+    }
+  }
+
+  fillDropdown(listElement, filtered, type);
+}
+
+// ================================
+// === ÉVÉNEMENT RECIPES FILTRÉES
+// ================================
+// Écoute les changements de recettes filtrées
+document.addEventListener('recipesFiltered', function (e) {
+  updateDropdowns(e.detail);
+});
+
+// ================================
+// === DROPDOWNS OUVERTURE / FERMETURE
+// ================================
+const dropdownToggles = document.querySelectorAll('.dropdown__toggle');
+
+// Gestion du clic sur les boutons de dropdown
+for (let i = 0; i < dropdownToggles.length; i++) {
+  dropdownToggles[i].addEventListener('click', function (event) {
+    const button = event.currentTarget;
+    const menuId = button.getAttribute('aria-controls');
+    const menu = document.getElementById(menuId);
+
+    const isOpen = !menu.classList.contains('hidden');
+
+    // Ferme tous les menus
+    const allMenus = document.querySelectorAll('.dropdown__menu');
+    for (let j = 0; j < allMenus.length; j++) {
+      allMenus[j].classList.add('hidden');
+      // Met à jour aria-expanded
+      const allToggles = document.querySelectorAll('.dropdown__toggle');
+      for (let k = 0; k < allToggles.length; k++) {
+        allToggles[k].setAttribute('aria-expanded', 'false');
+      }
+    }
+
+    // Ouvre le menu si il était fermé
+    if (!isOpen) {
+      menu.classList.remove('hidden');
+      button.setAttribute('aria-expanded', 'true');
+    }
   });
 }
 
-// --- Fonction principale ---
-function initDropdowns() {
-  const ingredients = getUniqueIngredients(recipes);
-  const appliances = getUniqueAppliances(recipes);
-  const ustensils = getUniqueUstensils(recipes);
+// Ferme les dropdowns si clic à l'extérieur
+document.addEventListener('click', function (event) {
+  let isClickInside = false;
 
-  fillDropdown(ingredientsList, ingredients);
-  fillDropdown(appliancesList, appliances);
-  fillDropdown(ustensilsList, ustensils);
-}
+  // Vérifie si le clic est sur un toggle ou dans un menu
+  for (let i = 0; i < dropdownToggles.length; i++) {
+    if (dropdownToggles[i].contains(event.target)) {
+      isClickInside = true;
+      break;
+    }
+  }
 
-// --- Initialisation ---
-document.addEventListener('DOMContentLoaded', initDropdowns);
+  const allMenus = document.querySelectorAll('.dropdown__menu');
+  for (let i = 0; i < allMenus.length; i++) {
+    if (allMenus[i].contains(event.target)) {
+      isClickInside = true;
+      break;
+    }
+  }
+
+  // Si clic à l'extérieur, ferme tous les menus
+  if (!isClickInside) {
+    for (let i = 0; i < allMenus.length; i++) {
+      allMenus[i].classList.add('hidden');
+    }
+    for (let i = 0; i < dropdownToggles.length; i++) {
+      dropdownToggles[i].setAttribute('aria-expanded', 'false');
+    }
+  }
+});
+
+// ================================
+// === BARRES DE RECHERCHE INTERNES DES DROPDOWNS
+// ================================
+document.addEventListener('DOMContentLoaded', function () {
+  // Stockage des listes complètes pour chaque dropdown
+  let allIngredients = [];
+  let allAppliances = [];
+  let allUstensils = [];
+
+  // Fonction pour sauvegarder les listes actuelles
+  function saveCurrentLists() {
+    allIngredients = [];
+    allAppliances = [];
+    allUstensils = [];
+
+    // Ingrédients
+    const ingredientsItems = ingredientsList.querySelectorAll('button');
+    for (let i = 0; i < ingredientsItems.length; i++) {
+      allIngredients.push(ingredientsItems[i].textContent);
+    }
+
+    // Appareils
+    const appliancesItems = appliancesList.querySelectorAll('button');
+    for (let i = 0; i < appliancesItems.length; i++) {
+      allAppliances.push(appliancesItems[i].textContent);
+    }
+
+    // Ustensiles
+    const ustensilsItems = ustensilsList.querySelectorAll('button');
+    for (let i = 0; i < ustensilsItems.length; i++) {
+      allUstensils.push(ustensilsItems[i].textContent);
+    }
+  }
+
+  // Sauvegarde initiale
+  updateDropdowns(window.allRecipes);
+  saveCurrentLists();
+
+  // Re-sauvegarde à chaque mise à jour des recettes
+  document.addEventListener('recipesFiltered', function () {
+    // Petit délai pour laisser le DOM se mettre à jour
+    setTimeout(saveCurrentLists, 0);
+  });
+
+  // Barre de recherche Ingrédients
+  const ingredientsSearch = document.getElementById('ingredients-search');
+  if (ingredientsSearch) {
+    ingredientsSearch.addEventListener('input', function () {
+      filterDropdownItems(this, ingredientsList, allIngredients, 'ingredient');
+    });
+  }
+
+  // Barre de recherche Appareils
+  const appliancesSearch = document.getElementById('appareils-search');
+  if (appliancesSearch) {
+    appliancesSearch.addEventListener('input', function () {
+      filterDropdownItems(this, appliancesList, allAppliances, 'appliance');
+    });
+  }
+
+  // Barre de recherche Ustensiles
+  const ustensilsSearch = document.getElementById('ustensiles-search');
+  if (ustensilsSearch) {
+    ustensilsSearch.addEventListener('input', function () {
+      filterDropdownItems(this, ustensilsList, allUstensils, 'ustensil');
+    });
+  }
+});

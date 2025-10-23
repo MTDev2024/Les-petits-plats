@@ -328,25 +328,17 @@
       </section>
 
       <!-- Tags -->
-      <section class="tags-display pb-12">
+      <section class="tags-display pb-12" id="active-tags">
         <h2 class="sr-only">Mots-clés sélectionnés</h2>
-        <!-- Tag -->
-        <button
-          type="button"
-          class="tag-element bg-primary-yellow cursor-pointer rounded-md inline-flex items-center gap-2 font-sans font-normal px-3 py-1.5 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-          data-tag="spatule"
-          aria-label="Supprimer le tag Spatule"
-        >
-          Spatule
-          <img
-            src="images/icons/vector.png"
-            alt=""
-            aria-hidden="true"
-            class="w-[12px] h-[12px] pl-1"
-          />
-        </button>
-        <!--Fin Tag -->
+        <!-- Tags actifs injectés ici -->
       </section>
+      <!-- Message d'erreur -->
+      <div id="no-results-message" class="mb-8 p-6 bg-gray-100 rounded-lg">
+        <p class="text-lg text-gray-700">
+          Aucune recette ne contient
+          <span id="search-term" class="font-semibold"></span>.
+        </p>
+      </div>
 
       <!-- Template - Recipe Card -->
       <template id="recipe-card-template">
