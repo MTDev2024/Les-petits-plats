@@ -1,14 +1,12 @@
 // Mode : if, for, else
 
 // -- SÉLECTION DES ÉLÉMENTS
-
 const ingredientsList = document.querySelector('.ingredients-dropdown__list');
 const appliancesList = document.querySelector('.appareils-dropdown__list');
 const ustensilsList = document.querySelector('.ustensiles-dropdown__list');
 const tagsDisplay = document.querySelector('.tags-display');
 
 // -- NORMALISATION
-
 function normalizeString(str) {
   return str
     .toLowerCase()
@@ -115,7 +113,6 @@ function fillDropdown(listElement, items, type) {
 }
 
 // -- MÀJ DROPDOWNS SELON RECETTES FILTRÉES
-
 function updateDropdowns(recipesArray) {
   // Utilise une variable locale au lieu de modifier le paramètre
   let recipes = recipesArray;
@@ -196,7 +193,6 @@ function filterDropdownItems(searchInput, listElement, allItems, type) {
 }
 
 // -- ÉVÉNEMENT RECIPES FILTRÉES
-
 // Écoute les changements de recettes filtrées
 document.addEventListener('recipesFiltered', function (e) {
   updateDropdowns(e.detail);
