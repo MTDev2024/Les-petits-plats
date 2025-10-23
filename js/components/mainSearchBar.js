@@ -1,4 +1,4 @@
-// Mode classique : if, else, for, etc.
+// Mode : if, else, for, etc.
 
 // -- IMPORTS
 import recipes from '../data/recipes.js'; // Import recettes
@@ -21,7 +21,6 @@ function normalizeString(str) {
 // -- AFFICHAGE CONSIGNE UTILISATEUR
 
 // -- AFFICHAGE MESSAGE D'ERREUR
-
 function displayNoResultsMessage(show, searchTerm) {
   const messageElement = document.getElementById('no-results-message');
   const searchTermElement = document.getElementById('search-term');
