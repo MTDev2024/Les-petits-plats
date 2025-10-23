@@ -1,18 +1,14 @@
-// dropdown.js
-// Gestion des dropdowns, tags et mise à jour des listes
-// Mode classique : if, for, else
+// Mode : if, for, else
 
-// ================================
-// === SÉLECTION DES ÉLÉMENTS
-// ================================
+// -- SÉLECTION DES ÉLÉMENTS
+
 const ingredientsList = document.querySelector('.ingredients-dropdown__list');
 const appliancesList = document.querySelector('.appareils-dropdown__list');
 const ustensilsList = document.querySelector('.ustensiles-dropdown__list');
 const tagsDisplay = document.querySelector('.tags-display');
 
-// ================================
-// === NORMALISATION
-// ================================
+// -- NORMALISATION
+
 function normalizeString(str) {
   return str
     .toLowerCase()
@@ -20,15 +16,14 @@ function normalizeString(str) {
     .replace(/[\u0300-\u036f]/g, '');
 }
 
-// ================================
-// === AJOUT D'UN TAG
-// ================================
+// -- AJOUT D'UN TAG
+
 function addTag(tagName, type) {
-  // Vérifie si le tag existe déjà (évite les doublons)
+  // Vérification si tag existe déjà (éviter doublons)
   const existingTag = tagsDisplay.querySelector('[data-tag="' + tagName + '"]');
   if (existingTag) return;
 
-  // Crée le bouton tag
+  // Création bouton / tag
   const tagButton = document.createElement('button');
   tagButton.type = 'button';
   tagButton.className =
@@ -52,20 +47,19 @@ function addTag(tagName, type) {
   // Ajout aux tags globaux
   window.activeTags.push({ type: type, value: tagName });
 
-  // Réapplique tous les filtres (barre principale + tags)
+  // Réapplique tous les filtres (input principal + tags)
   if (window.reapplyFilters) {
     window.reapplyFilters();
   }
 
-  // Suppression du tag au clic
+  // Suppression tag au clic
   tagButton.addEventListener('click', function () {
     removeTag(tagButton, type, tagName);
   });
 }
 
-// ================================
-// === SUPPRESSION D'UN TAG
-// ================================
+// -- SUPPRESSION D'UN TAG
+
 function removeTag(tagButton, type, tagName) {
   // Supprime le bouton du DOM
   tagButton.remove();
@@ -87,9 +81,7 @@ function removeTag(tagButton, type, tagName) {
   }
 }
 
-// ================================
-// === REMPLISSAGE D'UN DROPDOWN
-// ================================
+// -- REMPLISSAGE D'UN DROPDOWN
 function fillDropdown(listElement, items, type) {
   listElement.innerHTML = ''; // vide la liste
 
@@ -104,7 +96,7 @@ function fillDropdown(listElement, items, type) {
     return;
   }
 
-  // Crée un bouton pour chaque item
+  // Création bouton pour chaque item
   for (let i = 0; i < items.length; i++) {
     const item = items[i];
     const li = document.createElement('li');
@@ -124,23 +116,25 @@ function fillDropdown(listElement, items, type) {
   }
 }
 
-// ================================
-// === MISE À JOUR DES DROPDOWNS SELON RECETTES FILTRÉES
-// ================================
+// -- MÀJ DROPDOWNS SELON RECETTES FILTRÉES
+
 function updateDropdowns(recipesArray) {
-  // Si aucune recette, utilise toutes les recettes
-  if (!recipesArray || recipesArray.length === 0) {
-    recipesArray = window.allRecipes;
+  // Utilise une variable locale au lieu de modifier le paramètre
+  let recipes = recipesArray;
+
+  // Si aucune recette, utilisation de toutes les recettes
+  if (!recipes || recipes.length === 0) {
+    recipes = window.allRecipes;
   }
 
-  // Utilise des objets comme "sets" pour éviter les doublons
+  // Utilisation objets comme "sets" -> éviter les doublons
   const ingredientsSet = {};
   const appliancesSet = {};
   const ustensilsSet = {};
 
   // Parcours de toutes les recettes filtrées
-  for (let i = 0; i < recipesArray.length; i++) {
-    const recipe = recipesArray[i];
+  for (let i = 0; i < recipes.length; i++) {
+    const recipe = recipes[i];
 
     // Récupère tous les ingrédients
     for (let j = 0; j < recipe.ingredients.length; j++) {
@@ -181,9 +175,7 @@ function updateDropdowns(recipesArray) {
   fillDropdown(ustensilsList, ustensilsArray, 'ustensil');
 }
 
-// ================================
-// === FILTRAGE DES DROPDOWNS (BARRES DE RECHERCHE INTERNES)
-// ================================
+// -- FILTRAGE DES DROPDOWNS (BARRES DE RECHERCHE INTERNES)
 function filterDropdownItems(searchInput, listElement, allItems, type) {
   const keyword = normalizeString(searchInput.value.trim());
 
@@ -193,7 +185,7 @@ function filterDropdownItems(searchInput, listElement, allItems, type) {
     return;
   }
 
-  // Filtre les items qui contiennent le mot-clé
+  // Filtre items contenant mot-clé
   const filtered = [];
   for (let i = 0; i < allItems.length; i++) {
     const itemNormalized = normalizeString(allItems[i]);
@@ -205,20 +197,18 @@ function filterDropdownItems(searchInput, listElement, allItems, type) {
   fillDropdown(listElement, filtered, type);
 }
 
-// ================================
-// === ÉVÉNEMENT RECIPES FILTRÉES
-// ================================
+// -- ÉVÉNEMENT RECIPES FILTRÉES
+
 // Écoute les changements de recettes filtrées
 document.addEventListener('recipesFiltered', function (e) {
   updateDropdowns(e.detail);
 });
 
-// ================================
-// === DROPDOWNS OUVERTURE / FERMETURE
-// ================================
+// -- DROPDOWNS OUVERTURE / FERMETURE
+
 const dropdownToggles = document.querySelectorAll('.dropdown__toggle');
 
-// Gestion du clic sur les boutons de dropdown
+// Gestion clic boutons dropdown
 for (let i = 0; i < dropdownToggles.length; i++) {
   dropdownToggles[i].addEventListener('click', function (event) {
     const button = event.currentTarget;
@@ -231,14 +221,14 @@ for (let i = 0; i < dropdownToggles.length; i++) {
     const allMenus = document.querySelectorAll('.dropdown__menu');
     for (let j = 0; j < allMenus.length; j++) {
       allMenus[j].classList.add('hidden');
-      // Met à jour aria-expanded
+      // MàJ aria-expanded
       const allToggles = document.querySelectorAll('.dropdown__toggle');
       for (let k = 0; k < allToggles.length; k++) {
         allToggles[k].setAttribute('aria-expanded', 'false');
       }
     }
 
-    // Ouvre le menu si il était fermé
+    // Ouverture menu si il était fermé
     if (!isOpen) {
       menu.classList.remove('hidden');
       button.setAttribute('aria-expanded', 'true');
@@ -246,11 +236,11 @@ for (let i = 0; i < dropdownToggles.length; i++) {
   });
 }
 
-// Ferme les dropdowns si clic à l'extérieur
+// Fermeture dropdowns si clic à l'extérieur
 document.addEventListener('click', function (event) {
   let isClickInside = false;
 
-  // Vérifie si le clic est sur un toggle ou dans un menu
+  // Vérification si clic sur un toggle ou dans un menu
   for (let i = 0; i < dropdownToggles.length; i++) {
     if (dropdownToggles[i].contains(event.target)) {
       isClickInside = true;
@@ -266,7 +256,7 @@ document.addEventListener('click', function (event) {
     }
   }
 
-  // Si clic à l'extérieur, ferme tous les menus
+  // Fermeture menus si clic à l'extérieur
   if (!isClickInside) {
     for (let i = 0; i < allMenus.length; i++) {
       allMenus[i].classList.add('hidden');
@@ -277,9 +267,7 @@ document.addEventListener('click', function (event) {
   }
 });
 
-// ================================
-// === BARRES DE RECHERCHE INTERNES DES DROPDOWNS
-// ================================
+// -- BARRES DE RECHERCHE INTERNES DES DROPDOWNS
 document.addEventListener('DOMContentLoaded', function () {
   // Stockage des listes complètes pour chaque dropdown
   let allIngredients = [];
@@ -315,9 +303,9 @@ document.addEventListener('DOMContentLoaded', function () {
   updateDropdowns(window.allRecipes);
   saveCurrentLists();
 
-  // Re-sauvegarde à chaque mise à jour des recettes
+  // Re-sauvegarde à chaque MàJ des recettes
   document.addEventListener('recipesFiltered', function () {
-    // Petit délai pour laisser le DOM se mettre à jour
+    // Délai pour MàJ du DOM
     setTimeout(saveCurrentLists, 0);
   });
 

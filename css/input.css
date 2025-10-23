@@ -18,7 +18,7 @@
   font-display: swap;
 }
 
-/* ==== VARIABLES TAILWIND ==== */
+/* --- VARIABLES TAILWIND --- */
 
 @theme {
   /* Couleurs */
@@ -31,6 +31,6 @@
   --color--black: #1b1b1b;
 
   /* Fonts */
-  --font-family-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-family-sans: 'Manrope', system-ui, sans-serif;
   --font-family-display: 'Anton', Impact, sans-serif;
 }
