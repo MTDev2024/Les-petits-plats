@@ -74,7 +74,7 @@
               type="text"
               id="main-search"
               placeholder="Rechercher une recette, un ingrédient, ..."
-              class="search-bar__input w-full bg-white px-6 py-4 pr-20 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-primary-yellow shadow-lg"
+              class="search-bar__input w-full bg-white px-6 py-4 pr-20 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-primary-yellow placeholder-gray-800"
             />
 
             <!-- Bouton de recherche -->
@@ -109,7 +109,7 @@
       <section class="filters flex justify-between mb-4">
         <h2 class="sr-only">Filtres de recherche</h2>
 
-        <div class="dropdowns flex gap-12 cursor-pointer">
+        <div class="dropdowns flex gap-10 cursor-pointer">
           <!-- Dropdown Ingrédients -->
           <div class="ingredients-dropdown">
             <!-- Bouton principal -->
@@ -149,7 +149,7 @@
                   type="text"
                   id="ingredients-search"
                   placeholder="Rechercher..."
-                  class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md"
+                  class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md placeholder-gray-800"
                 />
                 <svg
                   class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
@@ -213,7 +213,7 @@
                   type="text"
                   id="appareils-search"
                   placeholder="Rechercher..."
-                  class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md"
+                  class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md placeholder-gray-800"
                 />
                 <svg
                   class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
@@ -286,7 +286,7 @@
                   type="text"
                   id="ustensiles-search"
                   placeholder="Rechercher..."
-                  class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md"
+                  class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md placeholder-gray-800"
                 />
                 <svg
                   class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
@@ -328,25 +328,17 @@
       </section>
 
       <!-- Tags -->
-      <section class="tags-display pb-12">
+      <section class="tags-display pb-12 flex gap-1.5" id="active-tags">
         <h2 class="sr-only">Mots-clés sélectionnés</h2>
-        <!-- Tag -->
-        <button
-          type="button"
-          class="tag-element bg-primary-yellow cursor-pointer rounded-md inline-flex items-center gap-2 font-sans font-normal px-3 py-1.5 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500"
-          data-tag="spatule"
-          aria-label="Supprimer le tag Spatule"
-        >
-          Spatule
-          <img
-            src="images/icons/vector.png"
-            alt=""
-            aria-hidden="true"
-            class="w-[12px] h-[12px] pl-1"
-          />
-        </button>
-        <!--Fin Tag -->
+        <!-- Tags actifs injectés ici -->
       </section>
+      <!-- Message d'erreur -->
+      <div id="no-results-message" class="mb-8 p-6 bg-gray-100 rounded-lg">
+        <p class="text-lg text-gray-700">
+          Aucune recette ne contient
+          <span id="search-term" class="font-semibold"></span>.
+        </p>
+      </div>
 
       <!-- Template - Recipe Card -->
       <template id="recipe-card-template">
@@ -376,9 +368,7 @@
               <h4 class="text-text-grey text-xs font-bold uppercase mb-3">
                 Recette
               </h4>
-              <p
-                class="recipe-card__description text-text-black text-sm line-clamp-6"
-              ></p>
+              <p class="recipe-card__description text-text-black text-sm"></p>
             </div>
 
             <!-- Ingrédients -->
@@ -405,6 +395,6 @@
       </section>
     </main>
 
-    <script type="module" src="js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>
