@@ -39,28 +39,82 @@ function displayNoResultsMessage(show, searchTerm) {
 
 function applyAllFilters() {
   let filtered = window.allRecipes; // On part de toutes les recettes
-  // Normaliser le mot-clé de recherche
+  // Normaliser mot-clé
   const keyword = normalizeString(window.mainSearchKeyword.trim());
 
-  // TODO : Partie 1 - Filtrage par recherche principale
+  // Partie 1 - Filtrage par recherche principale
   if (keyword.length >= 3) {
     const keywords = keyword.split(/\s+/);
+
     filtered = filtered.filter((recipe) => {
-      // Normaliser les données de la recette
+      // Normaliser données recette
       const nameNormalized = normalizeString(recipe.name);
       const descriptionNormalized = normalizeString(recipe.description);
 
-      // TODO : normaliser les ingrédients (avec .map())
+      // Normaliser ingrédients
       const ingredientsNormalized = recipe.ingredients.map((ing) => {
         return normalizeString(ing.ingredient);
       });
 
-      // TODO : vérifier si TOUS les mots-clés correspondent (avec .every())
-      // TODO : vérifier si la recette correspond aux mots-clés
-      return true; // Pour l'instant on garde tout
+      // Vérifier si TOUS les mots-clés correspondent
+      const allWordsMatch = keywords.every((kw) => {
+        let found = false; // ← AJOUTÉ
+
+        // 1. Chercher dans nom
+        const nameWords = nameNormalized.split(/\s+/);
+        if (nameWords.some((word) => word.startsWith(kw))) {
+          found = true;
+        }
+
+        // 2. Chercher dans description (si pas encore trouvé)
+        if (!found) {
+          const descWords = descriptionNormalized.split(/\s+/);
+          if (descWords.some((word) => word.startsWith(kw))) {
+            found = true;
+          }
+        }
+
+        // 3. Chercher dans ingrédients (si pas encore trouvé)
+        if (!found) {
+          found = ingredientsNormalized.some((ingredient) => {
+            const ingWords = ingredient.split(/\s+/);
+            return ingWords.some((word) => word.startsWith(kw));
+          });
+        }
+
+        return found;
+      });
+
+      return allWordsMatch;
     });
+
+    // TESTS TEMPORAIRES
+    console.log('Recherche:', window.mainSearchKeyword);
+    console.log('Recettes trouvées:', filtered.length);
+    console.log(filtered);
   }
+
   // TODO : Partie 2 - Filtrage par tags
 
-  // TODO : Partie 3 - Mise à jour de l'affichage
+  // TODO : Partie 3 - MàJ affichage
 }
+
+// -- FONCTION GLOBALE RÉAPPLIQUER LES FILTRES
+// Fonction appelée depuis dropdown.js
+window.reapplyFilters = function () {
+  applyAllFilters();
+};
+
+// -- INITIALISATION
+document.addEventListener('DOMContentLoaded', function () {
+  const mainSearchInput = document.getElementById('main-search');
+
+  // Écoute saisie utilisateur dans input principal
+  mainSearchInput.addEventListener('input', function (event) {
+    window.mainSearchKeyword = event.target.value;
+    applyAllFilters();
+  });
+
+  // Affichage initial (toutes les recettes)
+  applyAllFilters();
+});
