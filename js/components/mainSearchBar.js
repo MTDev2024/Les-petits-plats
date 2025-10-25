@@ -89,14 +89,36 @@ function applyAllFilters() {
     });
 
     // TESTS TEMPORAIRES
-    console.log('Recherche:', window.mainSearchKeyword);
-    console.log('Recettes trouvées:', filtered.length);
-    console.log(filtered);
+    // console.log('Recherche:', window.mainSearchKeyword);
+    // console.log('Recettes trouvées:', filtered.length);
+    // console.log(filtered);
   }
 
   // TODO : Partie 2 - Filtrage par tags
 
   // TODO : Partie 3 - MàJ affichage
+  window.filteredRecipes = filtered;
+
+  // Gestion message "Aucune recette"
+  // Utilisation de 'keyword' existant déjà au début de la fonction
+  if (filtered.length === 0 && keyword.length >= 3) {
+    displayNoResultsMessage(true, window.mainSearchKeyword.trim());
+  } else {
+    displayNoResultsMessage(false, '');
+    displayRecipes(filtered);
+  }
+
+  // MàJ compteur recettes
+  const recipesTotal = document.querySelector('.recipes-total p');
+  if (recipesTotal) {
+    recipesTotal.textContent =
+      filtered.length + ' recette' + (filtered.length > 1 ? 's' : '');
+  }
+
+  // Dispatch pour dropdown.js (mise à jour des listes)
+  document.dispatchEvent(
+    new CustomEvent('recipesFiltered', { detail: filtered })
+  );
 }
 
 // -- FONCTION GLOBALE RÉAPPLIQUER LES FILTRES
