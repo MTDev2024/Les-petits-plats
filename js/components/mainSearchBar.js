@@ -94,7 +94,31 @@ function applyAllFilters() {
     // console.log(filtered);
   }
 
-  // TODO : Partie 2 - Filtrage par tags
+  // PARTIE 2 : Filtrage par tags (intersection progressive)
+filtered = window.activeTags.reduce((remainingRecipes, tag) => {
+  // Pour CE tag, on garde seulement les recettes qui correspondent
+  return remainingRecipes.filter(recipe => {
+    let matches = false;
+    
+    if (tag.type === 'ingredient') {
+      // Vérifier si recipe contient cet ingrédient
+      matches = recipe.ingredients.some(ing => {
+        return normalizeString(ing.ingredient) === normalizeString(tag.value);
+      });
+    } else if (tag.type === 'appliance') {
+      // Vérifier si recipe utilise cet appareil
+      matches = normalizeString(recipe.appliance) === normalizeString(tag.value);
+    } else if (tag.type === 'ustensil') {
+      // Vérifier si recipe utilise cet ustensile
+      matches = recipe.ustensils.some(ustensil => {
+        return normalizeString(ustensil) === normalizeString(tag.value);
+      });
+    }
+    
+    return matches;
+  });
+}, filtered);
+
 
   // TODO : Partie 3 - MàJ affichage
   window.filteredRecipes = filtered;
