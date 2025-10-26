@@ -32,6 +32,7 @@ export function createRecipeCard(recipe) {
   // Insertion données reçues depuis objet "recipe"
   img.src = `./images/${recipe.image}`;
   img.alt = recipe.name;
+  img.loading = 'lazy';
   title.textContent = recipe.name;
   badge.textContent = `${recipe.time}min`;
   badge.setAttribute(
