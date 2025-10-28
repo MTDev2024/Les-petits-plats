@@ -53,23 +53,26 @@ function addTag(tagName, type) {
   });
 }
 
-// -- SUPPRESSION D'UN TAG
 function removeTag(tagButton, type, tagName) {
-  // Supprime le bouton du DOM
+  // Suppression du bouton du DOM
   tagButton.remove();
 
-  // Supprime le tag du tableau global
-  const newTags = [];
-  for (let i = 0; i < window.activeTags.length; i++) {
-    const currentTag = window.activeTags[i];
-    // On garde uniquement les tags différents
-    if (!(currentTag.type === type && currentTag.value === tagName)) {
-      newTags.push(currentTag);
-    }
-  }
-  window.activeTags = newTags;
+  // Suppression du tag du tableau global avec .filter()
+  // .filter() parcourt chaque tag et garde seulement ceux qui passent le test
+  window.activeTags = window.activeTags.filter((currentTag) => {
+    // currentTag : un tag du tableau activeTags
 
-  // Réapplique tous les filtres
+    // Vérification si c'est le tag à supprimer :
+    // - currentTag.type === type : le type correspond ?
+    // - currentTag.value === tagName : la valeur correspond ?
+    // - && : les DEUX doivent être vrais
+    // - ! : on INVERSE le résultat
+    //   → Si c'est le tag à supprimer (true) : !true = false → supprimé
+    //   → Si ce n'est pas le tag (false) : !false = true → gardé
+    return !(currentTag.type === type && currentTag.value === tagName);
+  });
+
+  // Réapplique tous les filtres (recherche + tags restants)
   if (window.reapplyFilters) {
     window.reapplyFilters();
   }
