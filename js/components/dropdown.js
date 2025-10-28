@@ -59,16 +59,21 @@ function addTag(tagName, type) {
 function removeTag(tagButton, type, tagName) {
   // Supprime le bouton du DOM
   tagButton.remove();
-
   // Supprime le tag du tableau global
+  // Création d'un tableau vide
   const newTags = [];
+  // Boucle sur chaque tag
   for (let i = 0; i < window.activeTags.length; i++) {
+    // Récupération tag actuel
     const currentTag = window.activeTags[i];
     // On garde uniquement les tags différents
+    // Test
     if (!(currentTag.type === type && currentTag.value === tagName)) {
+      // Si différent, ajout au nouveau tableau
       newTags.push(currentTag);
     }
   }
+  // Remplacement de l'ancien tableau
   window.activeTags = newTags;
 
   // Réapplique tous les filtres
