@@ -77,3 +77,7 @@ function removeTag(tagButton, type, tagName) {
     window.reapplyFilters();
   }
 }
+
+// -- REMPLISSAGE D'UN DROPDOWN
+
+// Création bouton pour chaque item
