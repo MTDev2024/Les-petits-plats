@@ -79,5 +79,87 @@ function removeTag(tagButton, type, tagName) {
 }
 
 // -- REMPLISSAGE D'UN DROPDOWN
+function fillDropdown(listElement, items, type) {
+  listElement.innerHTML = ''; // vide la liste
 
-// Création bouton pour chaque item
+  // Si aucun item, affiche un message
+  if (items.length === 0) {
+    const li = document.createElement('li');
+    const span = document.createElement('span');
+    span.className = 'block p-4 text-sm text-gray-500 italic';
+    span.textContent = 'Aucun résultat';
+    li.appendChild(span);
+    listElement.appendChild(li);
+    return;
+  }
+
+  // Création bouton pour chaque item
+  items.forEach((item) => {
+    const li = document.createElement('li');
+    const button = document.createElement('button');
+    button.className =
+      'w-full text-left p-4 text-sm hover:bg-primary-yellow focus:bg-primary-yellow focus:outline-none';
+    button.textContent = item;
+    button.setAttribute('role', 'menuitem');
+
+    // Ajout du tag au clic
+    button.addEventListener('click', function () {
+      addTag(item, type);
+    });
+
+    li.appendChild(button);
+    listElement.appendChild(li);
+  });
+}
+
+// -- MÀJ DROPDOWNS SELON RECETTES FILTRÉES
+function updateDropdowns(recipesArray) {
+  let recipes = recipesArray;
+
+  // Si aucune recette, utilisation de toutes les recettes
+  if (!recipes || recipes.length === 0) {
+    recipes = window.allRecipes;
+  }
+
+  // Utilisation objets comme "sets" -> éviter les doublons
+  const ingredientsSet = {};
+  const appliancesSet = {};
+  const ustensilsSet = {};
+
+  // Parcours de toutes les recettes filtrées
+  recipes.forEach((recipe) => {
+    // Récupère tous les ingrédients avec .forEach()
+    recipe.ingredients.forEach((ing) => {
+      ingredientsSet[ing.ingredient] = true;
+    });
+
+    // Récupère l'appareil (pas de boucle, valeur unique)
+    appliancesSet[recipe.appliance] = true;
+
+    // Récupère tous les ustensiles avec .forEach()
+    recipe.ustensils.forEach((ustensil) => {
+      ustensilsSet[ustensil] = true;
+    });
+  });
+
+  // Supprime les items déjà ajoutés comme tags avec .forEach()
+  window.activeTags.forEach((tag) => {
+    if (tag.type === 'ingredient') {
+      delete ingredientsSet[tag.value];
+    } else if (tag.type === 'appliance') {
+      delete appliancesSet[tag.value];
+    } else if (tag.type === 'ustensil') {
+      delete ustensilsSet[tag.value];
+    }
+  });
+
+  // Conversion en tableau et tri alphabétique
+  const ingredientsArray = Object.keys(ingredientsSet).sort();
+  const appliancesArray = Object.keys(appliancesSet).sort();
+  const ustensilsArray = Object.keys(ustensilsSet).sort();
+
+  // Remplit les dropdowns
+  fillDropdown(ingredientsList, ingredientsArray, 'ingredient');
+  fillDropdown(appliancesList, appliancesArray, 'appliance');
+  fillDropdown(ustensilsList, ustensilsArray, 'ustensil');
+}
