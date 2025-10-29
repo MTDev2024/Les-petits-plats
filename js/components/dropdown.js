@@ -182,3 +182,62 @@ function filterDropdownItems(searchInput, listElement, allItems, type) {
 
   fillDropdown(listElement, filtered, type);
 }
+
+// -- ÉVÉNEMENT RECIPES FILTRÉES
+// Écoute les changements de recettes filtrées
+document.addEventListener('recipesFiltered', function (e) {
+  updateDropdowns(e.detail);
+});
+
+// -- DROPDOWNS OUVERTURE / FERMETURE
+const dropdownToggles = document.querySelectorAll('.dropdown__toggle');
+
+// Gestion clic boutons dropdown
+dropdownToggles.forEach((toggle) => {
+  toggle.addEventListener('click', function (event) {
+    const button = event.currentTarget;
+    const menuId = button.getAttribute('aria-controls');
+    const menu = document.getElementById(menuId);
+    const isOpen = !menu.classList.contains('hidden');
+
+    // Ferme tous les menus
+    const allMenus = document.querySelectorAll('.dropdown__menu');
+    allMenus.forEach((menu) => {
+      menu.classList.add('hidden');
+    });
+
+    // MàJ aria-expanded
+    const allToggles = document.querySelectorAll('.dropdown__toggle');
+    allToggles.forEach((toggle) => {
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+
+    // Ouverture menu si il était fermé
+    if (!isOpen) {
+      menu.classList.remove('hidden');
+      button.setAttribute('aria-expanded', 'true');
+    }
+  });
+});
+
+// Fermeture dropdowns si clic à l'extérieur
+document.addEventListener('click', function (event) {
+  const allMenus = document.querySelectorAll('.dropdown__menu');
+
+  // Vérification si clic sur un toggle ou dans un menu avec .some()
+  const isClickInside =
+    Array.from(dropdownToggles).some((toggle) =>
+      toggle.contains(event.target)
+    ) || Array.from(allMenus).some((menu) => menu.contains(event.target));
+
+  // Fermeture menus si clic à l'extérieur
+  if (!isClickInside) {
+    allMenus.forEach((menu) => {
+      menu.classList.add('hidden');
+    });
+
+    dropdownToggles.forEach((toggle) => {
+      toggle.setAttribute('aria-expanded', 'false');
+    });
+  }
+});
