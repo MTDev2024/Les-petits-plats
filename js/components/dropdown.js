@@ -241,3 +241,65 @@ document.addEventListener('click', function (event) {
     });
   }
 });
+
+// -- BARRES DE RECHERCHE INTERNES DES DROPDOWNS
+document.addEventListener('DOMContentLoaded', function () {
+  // Stockage des listes complètes pour chaque dropdown
+  let allIngredients = [];
+  let allAppliances = [];
+  let allUstensils = [];
+
+  function saveCurrentLists() {
+    // Ingrédients : transformer boutons en textes avec .map()
+    const ingredientsItems = ingredientsList.querySelectorAll('button');
+    allIngredients = Array.from(ingredientsItems).map(
+      (button) => button.textContent
+    );
+
+    // Appareils : transformer boutons en textes avec .map()
+    const appliancesItems = appliancesList.querySelectorAll('button');
+    allAppliances = Array.from(appliancesItems).map(
+      (button) => button.textContent
+    );
+
+    // Ustensiles : transformer boutons en textes avec .map()
+    const ustensilsItems = ustensilsList.querySelectorAll('button');
+    allUstensils = Array.from(ustensilsItems).map(
+      (button) => button.textContent
+    );
+  }
+
+  // Sauvegarde initiale
+  updateDropdowns(window.allRecipes);
+  saveCurrentLists();
+
+  // Re-sauvegarde à chaque MàJ des recettes
+  document.addEventListener('recipesFiltered', function () {
+    // Délai pour MàJ du DOM
+    setTimeout(saveCurrentLists, 0);
+  });
+
+  // Barre de recherche Ingrédients
+  const ingredientsSearch = document.getElementById('ingredients-search');
+  if (ingredientsSearch) {
+    ingredientsSearch.addEventListener('input', function () {
+      filterDropdownItems(this, ingredientsList, allIngredients, 'ingredient');
+    });
+  }
+
+  // Barre de recherche Appareils
+  const appliancesSearch = document.getElementById('appareils-search');
+  if (appliancesSearch) {
+    appliancesSearch.addEventListener('input', function () {
+      filterDropdownItems(this, appliancesList, allAppliances, 'appliance');
+    });
+  }
+
+  // Barre de recherche Ustensiles
+  const ustensilsSearch = document.getElementById('ustensiles-search');
+  if (ustensilsSearch) {
+    ustensilsSearch.addEventListener('input', function () {
+      filterDropdownItems(this, ustensilsList, allUstensils, 'ustensil');
+    });
+  }
+});
