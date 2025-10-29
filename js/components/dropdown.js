@@ -163,3 +163,22 @@ function updateDropdowns(recipesArray) {
   fillDropdown(appliancesList, appliancesArray, 'appliance');
   fillDropdown(ustensilsList, ustensilsArray, 'ustensil');
 }
+
+// -- FILTRAGE DES DROPDOWNS (BARRES DE RECHERCHE INTERNES)
+function filterDropdownItems(searchInput, listElement, allItems, type) {
+  const keyword = normalizeString(searchInput.value.trim());
+
+  // Si vide, affiche tous les items
+  if (keyword.length === 0) {
+    fillDropdown(listElement, allItems, type);
+    return;
+  }
+
+  // Filtre items contenant mot-clé
+  const filtered = allItems.filter((item) => {
+    const itemNormalized = normalizeString(item);
+    return itemNormalized.includes(keyword);
+  });
+
+  fillDropdown(listElement, filtered, type);
+}
