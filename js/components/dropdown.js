@@ -227,7 +227,7 @@ document.addEventListener('click', function (event) {
   // Vérification si clic sur un toggle ou dans un menu avec .some()
   const isClickInside =
     Array.from(dropdownToggles).some((toggle) =>
-      toggle.contains(event.target)
+      toggle.contains(event.target),
     ) || Array.from(allMenus).some((menu) => menu.contains(event.target));
 
   // Fermeture menus si clic à l'extérieur
@@ -253,19 +253,19 @@ document.addEventListener('DOMContentLoaded', function () {
     // Ingrédients : transformer boutons en textes avec .map()
     const ingredientsItems = ingredientsList.querySelectorAll('button');
     allIngredients = Array.from(ingredientsItems).map(
-      (button) => button.textContent
+      (button) => button.textContent,
     );
 
     // Appareils : transformer boutons en textes avec .map()
     const appliancesItems = appliancesList.querySelectorAll('button');
     allAppliances = Array.from(appliancesItems).map(
-      (button) => button.textContent
+      (button) => button.textContent,
     );
 
     // Ustensiles : transformer boutons en textes avec .map()
     const ustensilsItems = ustensilsList.querySelectorAll('button');
     allUstensils = Array.from(ustensilsItems).map(
-      (button) => button.textContent
+      (button) => button.textContent,
     );
   }
 

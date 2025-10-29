@@ -141,7 +141,7 @@ function applyAllFilters() {
 
   // Dispatch pour dropdown.js (mise à jour des listes)
   document.dispatchEvent(
-    new CustomEvent('recipesFiltered', { detail: filtered })
+    new CustomEvent('recipesFiltered', { detail: filtered }),
   );
 }
 
