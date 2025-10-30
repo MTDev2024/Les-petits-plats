@@ -22,19 +22,33 @@ function addTag(tagName, type) {
   const tagButton = document.createElement('button');
   tagButton.type = 'button';
   tagButton.className =
-    'tag-element bg-primary-yellow cursor-pointer rounded-md inline-flex items-center gap-2 px-3 py-1.5 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500';
+    'tag-element bg-primary-yellow cursor-pointer rounded-md inline-flex items-center gap-2 px-4 py-2 hover:bg-yellow-400 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500';
+
+  // -- Forcer alignement horizontal (texte + icône)
+  tagButton.style.display = 'flex';
+  tagButton.style.flexDirection = 'row';
+  tagButton.style.alignItems = 'center';
+  tagButton.style.gap = '0.5rem';
+
   tagButton.setAttribute('data-tag', tagName);
   tagButton.setAttribute('aria-label', 'Supprimer le tag ' + tagName);
 
+  // Texte du tag
   const tagText = document.createElement('span');
   tagText.textContent = tagName;
 
+  // Icône de suppression
   const tagIcon = document.createElement('img');
   tagIcon.src = 'images/icons/vector.png';
   tagIcon.alt = '';
   tagIcon.setAttribute('aria-hidden', 'true');
-  tagIcon.className = 'w-[12px] h-[12px] pl-1';
 
+  // Forcer l'image sur la même ligne que le texte
+  tagIcon.style.display = 'inline-block';
+  tagIcon.style.verticalAlign = 'middle';
+  tagIcon.className = 'w-[12px] h-[12px] pl-1'; // Tailwind inchangé
+
+  // Assemblage bouton
   tagButton.appendChild(tagText);
   tagButton.appendChild(tagIcon);
   tagsDisplay.appendChild(tagButton);
