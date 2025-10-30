@@ -46,7 +46,7 @@ function addTag(tagName, type) {
   // Forcer l'image sur la même ligne que le texte
   tagIcon.style.display = 'inline-block';
   tagIcon.style.verticalAlign = 'middle';
-  tagIcon.className = 'w-[12px] h-[12px] pl-1'; // Tailwind inchangé
+  tagIcon.className = 'w-[12px] h-[12px] pl-1';
 
   // Assemblage bouton
   tagButton.appendChild(tagText);
