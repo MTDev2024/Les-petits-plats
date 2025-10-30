@@ -64,7 +64,7 @@ function applyAllFilters() {
       const ingredientsNormalized = [];
       for (let j = 0; j < recipe.ingredients.length; j++) {
         ingredientsNormalized.push(
-          normalizeString(recipe.ingredients[j].ingredient)
+          normalizeString(recipe.ingredients[j].ingredient),
         );
       }
 
@@ -193,7 +193,7 @@ function applyAllFilters() {
 
   // Dispatch pour dropdown.js (mise à jour des listes)
   document.dispatchEvent(
-    new CustomEvent('recipesFiltered', { detail: filtered })
+    new CustomEvent('recipesFiltered', { detail: filtered }),
   );
 }
 
