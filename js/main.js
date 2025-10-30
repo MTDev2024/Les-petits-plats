@@ -14,7 +14,7 @@ const recipesContainer = document.querySelector('#recipes-container');
 // VARIABLES POUR VIRTUAL SCROLLING
 let allRecipes = recipes; // Liste complète recettes
 let displayedRecipes = []; // Recettes actuellement affichées
-const RECIPES_PER_LOAD = 12; // Nombre de recettes à charger par batch
+const RECIPES_PER_LOAD = 6; // Nombre de recettes à charger par batch
 let isLoading = false; // Flag pour éviter les chargements multiples
 
 // FONCTION DE CHARGEMENT PROGRESSIF
