@@ -49,17 +49,17 @@ function updateRecipeCount() {
   }
 }
 
-// DÉTECTION DU SCROLL POUR CHARGER PLUS
+// DÉTECTION SCROLL POUR CHARGER +
 window.addEventListener('scroll', () => {
-  // Si déjà en train de charger, on attend
+  // Si déjà en train de charger, attendre
   if (isLoading) return;
 
-  // Si toutes les recettes sont déjà affichées, on arrête
+  // Si toutes les recettes déjà affichées -> arrêter
   if (displayedRecipes.length >= allRecipes.length) return;
 
   // Calcul de la position du scroll
   const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-  // Si on atteint 80% de la page, on charge plus de recettes
+  // Si 80% de la page -> chargement + de recettes
   if (scrollTop + clientHeight >= scrollHeight * 0.8) {
     isLoading = true;
     loadMoreRecipes();

@@ -28,13 +28,13 @@ export function createRecipeCard(recipe) {
   // Création de l'élément <picture> pour supporter WebP avec fallback
   const picture = document.createElement('picture');
 
-  // Source WebP (prioritaire)
+  // Source WebP
   const sourceWebP = document.createElement('source');
   const webpPath = recipe.image.replace(/\.(jpg|jpeg|png)$/i, '.webp');
   sourceWebP.srcset = `./images/${webpPath}`;
   sourceWebP.type = 'image/webp';
 
-  // Configuration de l'image fallback (JPEG/PNG)
+  // Configuration image fallback
   img.src = `./images/${recipe.image}`;
   img.alt = recipe.name;
   img.loading = 'lazy';
@@ -44,7 +44,7 @@ export function createRecipeCard(recipe) {
   picture.appendChild(sourceWebP);
   picture.appendChild(img);
 
-  // Remplacement de l'image par le picture dans le wrapper
+  // Remplacement image par picture dans wrapper
   imgWrapper.innerHTML = '';
   imgWrapper.appendChild(picture);
 
@@ -60,7 +60,7 @@ export function createRecipeCard(recipe) {
   // === INGRÉDIENTS ===
   ingredientsGrid.setAttribute('role', 'list');
   recipe.ingredients.forEach(({ ingredient, quantity, unit }) => {
-    // Création bloc pour afficher un ingrédient
+    // Création bloc pour affichage ingrédient
     const div = document.createElement('div');
     div.setAttribute('role', 'listitem');
 
