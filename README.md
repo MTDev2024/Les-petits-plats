@@ -66,7 +66,7 @@ Ce projet vise à développer les compétences suivantes :
 
 | Technologie      | Version | Usage                          |
 | ---------------- | ------- | ------------------------------ |
-| **HTML5**        | -       | Structure sémantique           |
+| **HTML**         | 5.x     | Structure sémantique           |
 | **Tailwind CSS** | 4.1.14  | Styling responsive             |
 | **JavaScript**   | ES6+    | Logique métier                 |
 | **Node.js**      | 22.12.0 | Environnement de développement |
