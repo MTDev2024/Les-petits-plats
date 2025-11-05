@@ -1,17 +1,15 @@
-// Fonction pour créer une carte de recette
-// Export pour pouvoir l'utiliser dans d'autres fichiers JS
 export function createRecipeCard(recipe) {
-  // Récupération e template HTML caché dans le DOM
+  // Récupération template HTML dans le DOM
   const template = document.querySelector('#recipe-card-template');
 
-  // 2️⃣ On clone le contenu du template pour créer une nouvelle carte
+  // Clonage contenu du template pour création nouvelle carte
   const fragment = template.content.cloneNode(true);
 
-  // 3️⃣ On sélectionne les éléments du fragment qu'on va remplir
-  const article = fragment.querySelector('.recipe-card'); // l'article complet
-  const imgWrapper = fragment.querySelector('.recipe-card__image-wrapper'); // conteneur vide pour l'image
-  const badge = fragment.querySelector('.recipe-card__badge'); // badge pour le temps
-  const title = fragment.querySelector('.recipe-card__title'); // titre de la recette
+  // Sélection des éléments du fragment à remplir
+  const article = fragment.querySelector('.recipe-card');
+  const imgWrapper = fragment.querySelector('.recipe-card__image-wrapper'); // conteneur vide image
+  const badge = fragment.querySelector('.recipe-card__badge'); // badge temps
+  const title = fragment.querySelector('.recipe-card__title'); // titre recette
   const recipeText = fragment.querySelector('.recipe-card__description'); // description
   const ingredientsGrid = fragment.querySelector(
     '.recipe-card__ingredients-grid',
@@ -23,7 +21,7 @@ export function createRecipeCard(recipe) {
   title.id = `recipe-${recipe.id}-title`;
   recipeText.id = `recipe-${recipe.id}-desc`;
 
-  // On relie l'article à son titre et sa description
+  //Article relié à son titre et description
   article.setAttribute('aria-labelledby', title.id);
   article.setAttribute('aria-describedby', recipeText.id);
   article.setAttribute('role', 'article'); // rôle article
