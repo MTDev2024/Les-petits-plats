@@ -1,67 +1,79 @@
-// Export fonction pour utiliser partout
 export function createRecipeCard(recipe) {
-  // Récupération template HTML
+  // Récupération template HTML dans le DOM
   const template = document.querySelector('#recipe-card-template');
 
-  // Duplication contenu template -> fragment
+  // Clonage contenu du template pour création nouvelle carte
   const fragment = template.content.cloneNode(true);
 
-  // Sélection éléments du fragment
-  // Eléments à remplir avec infos de recette
+  // Sélection des éléments du fragment à remplir
   const article = fragment.querySelector('.recipe-card');
-  const img = fragment.querySelector('.recipe-card__image');
-  const badge = fragment.querySelector('.recipe-card__badge');
-  const title = fragment.querySelector('.recipe-card__title');
-  const recipeText = fragment.querySelector('.recipe-card__description');
+  const imgWrapper = fragment.querySelector('.recipe-card__image-wrapper'); // conteneur vide image
+  const badge = fragment.querySelector('.recipe-card__badge'); // badge temps
+  const title = fragment.querySelector('.recipe-card__title'); // titre recette
+  const recipeText = fragment.querySelector('.recipe-card__description'); // description
   const ingredientsGrid = fragment.querySelector(
     '.recipe-card__ingredients-grid'
-  ); // grille d’ingrédients
+  ); // grille pour les ingrédients
 
-  // === ACCESSIBILITÉ ===
-  // Ajout id pour lecteurs d’écran
+  // Accessibilité - lecteurs d'écran
+  // ID uniques pour chaque article et éléments
   article.id = `recipe-${recipe.id}`;
   title.id = `recipe-${recipe.id}-title`;
   recipeText.id = `recipe-${recipe.id}-desc`;
 
-  // On relie l’article à son titre et à sa description pour donner du sens sémantique
+  //Article relié à son titre et description
   article.setAttribute('aria-labelledby', title.id);
   article.setAttribute('aria-describedby', recipeText.id);
-  article.setAttribute('role', 'article');
+  article.setAttribute('role', 'article'); // rôle article
 
-  // === DONNÉES PRINCIPALES ===
-  // Insertion données reçues depuis objet "recipe"
-  img.src = `./images/${recipe.image}`;
-  img.alt = recipe.name;
+  // <picture> contiendra WebP + fallback
+  const picture = document.createElement('picture');
+
+  picture.innerHTML = `
+    <source srcset="./images/${recipe.image.replace(/\.(jpg|jpeg|png)$/i, '.webp')}" type="image/webp">
+    <img 
+      src="./images/${recipe.image}" 
+      alt="${recipe.name}" 
+      loading="lazy" 
+      class="recipe-card__image w-full h-[253px] object-cover"
+    >
+  `;
+
+  // Ajout <picture> dans wrapper
+  imgWrapper.appendChild(picture);
+
+  // Remplissage données principales
   title.textContent = recipe.name;
   badge.textContent = `${recipe.time}min`;
+  // Accessibilité
   badge.setAttribute(
     'aria-label',
     `Temps de préparation : ${recipe.time} minutes`
-  ); // aide vocale
-  recipeText.textContent = recipe.description; // texte descriptif
+  );
+  recipeText.textContent = recipe.description; // description recette
 
-  // === INGRÉDIENTS ===
-  ingredientsGrid.setAttribute('role', 'list');
+  // Remplissage grille ingrédients
+  ingredientsGrid.setAttribute('role', 'list'); // rôle pour accessibilité
 
+  // On parcourt chaque ingrédient de la recette
   recipe.ingredients.forEach(({ ingredient, quantity, unit }) => {
-    // Création bloc pour afficher un ingrédient
+    // Création conteneur pour chaque ingrédient
     const div = document.createElement('div');
-    div.setAttribute('role', 'listitem');
+    div.setAttribute('role', 'listitem'); // rôle pour accessibilité
 
     // Nom ingrédient
     const nameP = document.createElement('p');
     nameP.className = 'text-text-black text-sm font-medium';
     nameP.textContent = ingredient;
 
-    // Quantité et unité
+    // Quantité + unité
     const quantityP = document.createElement('p');
     quantityP.className = 'text-text-grey text-xs';
-
-    // Si quantité ou unité absentes, affichage tiret "-"
+    // Si quantity ou unit vide -> tiret
     const quantityText = [quantity, unit].filter(Boolean).join(' ') || '-';
     quantityP.textContent = quantityText;
 
-    // Ajout nom + quantité dans div ingrédient
+    // Ajout nom + quantité dans div
     div.appendChild(nameP);
     div.appendChild(quantityP);
 
@@ -69,7 +81,6 @@ export function createRecipeCard(recipe) {
     ingredientsGrid.appendChild(div);
   });
 
-  // retourne le fragment complet prêt à être ajouté dans la page
-  // utilisation : container.appendChild(createRecipeCard(recipe));
+  // Renvoi fragment complet
   return fragment;
 }

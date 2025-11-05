@@ -2,7 +2,7 @@ const recipes = [
   {
     id: 1,
     image: 'Recette01.jpg',
-    name: 'Limonade de Coco',
+    name: 'Limonade de coco',
     servings: 1,
     ingredients: [
       {
@@ -62,7 +62,7 @@ const recipes = [
         quantity: 5,
       },
       {
-        ingredient: 'Lait de Coco',
+        ingredient: 'Lait de coco',
         quantity: 100,
         unit: 'ml',
       },
@@ -643,7 +643,7 @@ const recipes = [
     ],
     time: 15,
     description:
-      'Coupez les fraises en morceaux, découpez la chaire de la pastèque en retirant les pépins. Mettre le tout dans le blender. Ajouter un cuillère à soupe de juste de citron ainsi que les glaçons. Ajoutez quelques feuilles de menthe pour plus de fraîcheur. Mixez le tout. Servir et déguster.',
+      'Coupez les fraises en morceaux, découpez la chair de la pastèque en retirant les pépins. Mettre le tout dans le blender. Ajouter un cuillère à soupe de jus de citron ainsi que les glaçons. Ajoutez quelques feuilles de menthe pour plus de fraîcheur. Mixez le tout. Servir et déguster.',
     appliance: 'Blender',
     ustensils: ['verres', 'couteau', 'presse citron'],
   },
@@ -1678,7 +1678,7 @@ const recipes = [
     ],
     time: 60,
     description:
-      'Mélanger la farine avec le sucre et les oeufs en ajoutant du sucre vanillé. Ajouter le lait petit à petit. Ajouter un petit vers de rhum. Verser la masse dans un plat beurré y placer les pruneaux et faire cuire à 200° pendant 45 minutes',
+      'Mélanger la farine avec le sucre et les oeufs en ajoutant du sucre vanillé. Ajouter le lait petit à petit. Ajouter un petit verre de rhum. Verser la masse dans un plat beurré y placer les pruneaux et faire cuire à 200° pendant 45 minutes',
     appliance: 'Four',
     ustensils: ['fouet', 'moule', 'verres'],
   },
@@ -1759,7 +1759,7 @@ const recipes = [
     servings: 4,
     ingredients: [
       {
-        ingredient: 'Bananes',
+        ingredient: 'Banane',
         quantity: 2,
       },
       {

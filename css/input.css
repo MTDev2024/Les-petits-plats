@@ -4,7 +4,7 @@
 
 @font-face {
   font-family: 'Manrope';
-  src: url('./fonts/manrope-v20-latin-regular.woff2') format('woff2');
+  src: url('../fonts/manrope-v20-latin-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -12,25 +12,25 @@
 
 @font-face {
   font-family: 'Anton';
-  src: url('./fonts/anton-v25-latin-regular.woff2') format('woff2');
+  src: url('../fonts/anton-v27-latin-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
-/* ==== VARIABLES TAILWIND ==== */
+/* --- VARIABLES TAILWIND --- */
 
 @theme {
   /* Couleurs */
   --color-primary-yellow: #ffd15b;
   --color-light-grey: #ededed;
   --color-card-bg: #ffffff;
-  --color-text-grey: #7a7a7a;
-  /* --color-text-grey: #6B7280;  Tailwind gray-500 pour accessibilité et contraste adapté */
+  /* --color-text-grey: #7a7a7a; */
+  --color-text-grey: #6b7280; /* Tailwind gray-500 pour accessibilité et contraste adapté */
   --color-text-black: #000000;
   --color--black: #1b1b1b;
 
   /* Fonts */
-  --font-family-sans: 'Manrope', system-ui, -apple-system, sans-serif;
+  --font-family-sans: 'Manrope', system-ui, sans-serif;
   --font-family-display: 'Anton', Impact, sans-serif;
 }
