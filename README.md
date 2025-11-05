@@ -17,9 +17,10 @@ L'accent est mis sur la **performance du moteur de recherche** et l'**éco-conce
 
 ### ✨ Fonctionnalités principales
 
-- 🔎 Recherche en temps réel parmi 50 recettes
-- 🏷️ Filtrage avancé par ingrédients, ustensiles et appareils
-- ⚡ Algorithme de recherche optimisé
+- 🔎 Recherche instantanée parmi 50 recettes
+- 🏷️ Filtrage par ingrédients, appareils et ustensiles
+- ⚡ Double algorithme de recherche (comparaison de performance)
+- 🧩 Tags dynamiques avec suppression individuelle
 - 🌱 Développement éco-responsable (Green Code)
 
 ---
@@ -35,9 +36,10 @@ Le principal défi est de développer un **moteur de recherche fluide et perform
 
 Ce projet vise à développer les compétences suivantes :
 
-- ✅ **Analyser un problème informatique** et proposer des solutions techniques
+- ✅ **Analyser un besoin** fonctionnel et le traduire en **logique algorithmique**  
 - ✅ **Développer des algorithmes** pour résoudre un problème
 - ✅ **Comparer des implémentations** sur la base de tests de performance
+- ✅ **Documenter et mesurer la performance** via [jsben.ch](https://jsben.ch/)  
 - ✅ **Appliquer les principes du Green Code** (éco-conception web)
 - ✅ **Documenter son travail** de manière professionnelle
 
@@ -64,7 +66,7 @@ Ce projet vise à développer les compétences suivantes :
 
 | Technologie      | Version | Usage                          |
 | ---------------- | ------- | ------------------------------ |
-| **HTML5**        | -       | Structure sémantique           |
+| **HTML**         | 5.x     | Structure sémantique           |
 | **Tailwind CSS** | 4.1.14  | Styling responsive             |
 | **JavaScript**   | ES6+    | Logique métier                 |
 | **Node.js**      | 22.12.0 | Environnement de développement |
@@ -141,45 +143,48 @@ Ouvrez `index.html` dans votre navigateur :
 ```
 les-petits-plats/
 │
-├── 📄 index.html                 # Page principale
-├── 📄 README.md                  # Documentation
-├── 📄 package.json               # Dépendances npm
-├── 📄 tailwind.config.js         # Configuration Tailwind
-├── 📄 .eslintrc.js               # Configuration ESLint
-├── 📄 .prettierrc.json           # Configuration Prettier
-├── 📄 .gitignore                 # Fichiers ignorés par Git
+├── 📄 index.html
+├── 📄 README.md
+├── 📄 package.json
+├── 📄 package-lock.json
+├── 📄 tailwind.config.js
+├── 📄 .eslintrc.js
+├── 📄 .eslintignore
+├── 📄 .prettierrc.json
+├── 📄 .gitignore
 │
 ├── 📂 css/
-│   ├── input.css                 # Source Tailwind (variables, fonts)
-│   └── output.css                # CSS généré (ignoré par Git)
+│   ├── input.css                # Source Tailwind
+│   └── output.css               # CSS généré automatiquement
 │
-├── 📂 js/
-│   ├── main.js                   # Point d'entrée de l'application
-│   │
-│   ├── 📂 data/
-│   │   └── recipes.js            # 50 recettes (données statiques)
-│   │
-│   ├── 📂 components/
-│   │   ├── recipeCard.js         # Factory pour créer les cartes
-│   │   ├── searchBar.js          # Logique de recherche principale
-│   │   └── tagsList.js           # Gestion des tags de filtrage
-│   │
-│   └── 📂 utils/
-│       ├── security.js           # Sanitisation XSS
-│       └── helpers.js            # Fonctions utilitaires
-│
-├── 📂 images/
-│   ├── 📂 background/            # Image de fond du header
-│   ├── 📂 logo/                  # Logo du site
-│   └── Recette01.jpg à 50.jpg   # Photos des recettes
+├── 📂 docs/
+│   ├── fiche-investigation-recherche.md    # Comparatif d’algorithmes
+│   └── screenshots/                        # Captures pour la documentation
 │
 ├── 📂 fonts/
-│   ├── manrope-v20-latin-regular.woff2    # Font principale
-│   └── anton-v25-latin-regular.woff2      # Font pour les titres
+│   ├── anton-v27-latin-regular.woff2       # Font principale
+│   └── manrope-v20-latin-regular.woff2     # Font pour les titres
 │
-└── 📂 docs/
-    ├── fiche-investigation.md    # Comparaison des algorithmes
-    └── 📂 algorigrammes/         # Schémas des algorithmes
+├── 📂 images/
+│   ├── background/
+│   ├── icons/
+│   ├── logo/
+│   ├── Recette01. à 50.webp     # Photos des recettes
+│   └── Recette01.jpg à 50.jpg   # Fallback photos des recettes
+│
+├── 📂 js/
+│   ├── main.js                  # Point d’entrée global
+│   │
+│   ├── 📂 data/
+│   │   └── recipes.js           # Données des recettes (50)
+│   │
+│   └── 📂 components/
+│       ├── dropdown.js          # Gestion des menus déroulants
+│       ├── mainSearchBar.js     # Algorithme principal de recherche
+│       └── recipeCard.js        # Génération des cartes recettes
+│
+└── 📂 node_modules/
+
 ```
 
 ---
@@ -202,14 +207,15 @@ les-petits-plats/
   - 🍳 Ustensiles
   - 🔧 Appareils
 - Filtrage dynamique des options disponibles
-- Tags cumulatifs (possibilité d'en ajouter plusieurs)
+- Tags cumulatifs
 - Suppression individuelle des tags
 
 ### ⚡ Performance
 
 - Affichage instantané des 50 recettes au chargement
 - Lazy loading des images
-- CSS optimisé (purge automatique)
+- Lazy loading des recettes
+- CSS optimisé
 - Algorithme de recherche performant
 
 ---
@@ -230,50 +236,6 @@ Ce projet applique les principes de l'**éco-conception web** :
 | **Images lazy loading**   | Chargement à la demande            | Économie bande passante |
 | **Format .woff2**         | Compression optimale des fonts     | -30% vs .woff           |
 
-## 🗺️ Roadmap
 
-### ✅ Phase 1 - Setup (Semaine 1)
-
-- [x] Configuration du projet
-- [x] Tailwind CSS v4
-- [x] ESLint + Prettier
-- [x] Structure des dossiers
-- [x] Design system (couleurs, fonts)
-
-### ✅ Phase 2 - Interface (Semaine 1-2)
-
-- [x] Header
-- [ ] Section filtres (dropdowns + tags)
-- [x] Grid de cartes responsive
-- [x] Factory `createRecipeCard()`
-- [x] Validation W3C
-
-### 🚧 Phase 3 - Algorithmes (Semaine 2-3)
-
-- [ ] Implémentation algorithme natif
-- [ ] Implémentation algorithme fonctionnel
-- [ ] Tests de performance
-- [ ] Comparaison et analyse
-
-### 📝 Phase 4 - Documentation (Semaine 3)
-
-- [ ] Fiche d'investigation complète
-- [ ] Algorigrammes (draw.io)
-- [ ] Documentation technique Back-end
-- [ ] README finalisé
-
-### 🚀 Phase 5 - Livraison
-
-- [ ] Tests finaux
-- [ ] Merge de la meilleure solution sur `main`
-- [ ] Présentation du projet
-
----
-
----
-
-<div align="center">
 
 **⭐ Si ce projet vous a plu, n'hésitez pas à lui donner une étoile ! ⭐**
-
-</div>
