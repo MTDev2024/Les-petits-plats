@@ -1,3 +1,4 @@
+
 {
   "semi": true,
   "singleQuote": true,
@@ -6,5 +7,7 @@
   "trailingComma": "all",
   "printWidth": 80,
   "arrowParens": "always",
-  "endOfLine": "auto"
+  "endOfLine": "auto",
+  "htmlWhitespaceSensitivity": "ignore",
+  "quoteProps": "as-needed"
 }
