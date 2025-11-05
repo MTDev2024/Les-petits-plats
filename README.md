@@ -36,10 +36,10 @@ Le principal défi est de développer un **moteur de recherche fluide et perform
 
 Ce projet vise à développer les compétences suivantes :
 
-- ✅ **Analyser un besoin** fonctionnel et le traduire en **logique algorithmique**  
+- ✅ **Analyser un besoin** fonctionnel et le traduire en **logique algorithmique**
 - ✅ **Développer des algorithmes** pour résoudre un problème
 - ✅ **Comparer des implémentations** sur la base de tests de performance
-- ✅ **Documenter et mesurer la performance** via [jsben.ch](https://jsben.ch/)  
+- ✅ **Documenter et mesurer la performance** via [jsben.ch](https://jsben.ch/)
 - ✅ **Appliquer les principes du Green Code** (éco-conception web)
 - ✅ **Documenter son travail** de manière professionnelle
 
@@ -235,7 +235,5 @@ Ce projet applique les principes de l'**éco-conception web** :
 | **Import ES6 direct**     | Pas de fetch inutile               | -1 requête              |
 | **Images lazy loading**   | Chargement à la demande            | Économie bande passante |
 | **Format .woff2**         | Compression optimale des fonts     | -30% vs .woff           |
-
-
 
 **⭐ Si ce projet vous a plu, n'hésitez pas à lui donner une étoile ! ⭐**

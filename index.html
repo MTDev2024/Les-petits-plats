@@ -8,8 +8,7 @@
       content="Les Petits Plats - Trouvez rapidement la recette parfaite parmi nos 50 recettes de cuisine"
     />
     <meta name="author" content="Les Petits Plats" />
-        <link rel="icon" type="image/png" href="./images/favicon.png">
-
+    <link rel="icon" type="image/png" href="./images/favicon.png" />
 
     <!-- Open Graph (partage réseaux sociaux) -->
     <meta
@@ -51,7 +50,8 @@
         <h1
           class="header__title text-3xl md:text-4xl lg:text-[44px] font-normal mb-4 font-family-display text-primary-yellow"
         >
-          CHERCHEZ PARMI PLUS DE 1500 RECETTES <br />
+          CHERCHEZ PARMI PLUS DE 1500 RECETTES
+          <br />
           DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
         </h1>
 
@@ -59,9 +59,9 @@
         <div class="search-bar w-full max-w-[70%]">
           <div class="search-bar__wrapper relative">
             <!-- Label accessible caché -->
-            <label for="main-search" class="sr-only"
-              >Rechercher une recette</label
-            >
+            <label for="main-search" class="sr-only">
+              Rechercher une recette
+            </label>
 
             <!-- Input principal -->
             <input
@@ -136,9 +136,9 @@
             >
               <!-- Barre de recherche -->
               <div class="dropdown__search-bar relative border">
-                <label for="ingredients-search" class="sr-only"
-                  >Rechercher un ingrédient</label
-                >
+                <label for="ingredients-search" class="sr-only">
+                  Rechercher un ingrédient
+                </label>
                 <input
                   type="text"
                   id="ingredients-search"
@@ -200,9 +200,9 @@
             >
               <!-- Barre de recherche -->
               <div class="dropdown__search-bar relative border">
-                <label for="appareils-search" class="sr-only"
-                  >Rechercher un appareil</label
-                >
+                <label for="appareils-search" class="sr-only">
+                  Rechercher un appareil
+                </label>
                 <input
                   type="text"
                   id="appareils-search"
@@ -273,9 +273,9 @@
             >
               <!-- Barre de recherche -->
               <div class="dropdown__search-bar relative border">
-                <label for="ustensiles-search" class="sr-only"
-                  >Rechercher un ustensile</label
-                >
+                <label for="ustensiles-search" class="sr-only">
+                  Rechercher un ustensile
+                </label>
                 <input
                   type="text"
                   id="ustensiles-search"
@@ -333,53 +333,52 @@
       >
         <p class="text-lg text-gray-700">
           Aucune recette ne contient
-          <span id="search-term" class="font-semibold"></span>.
+          <span id="search-term" class="font-semibold"></span>
+          .
         </p>
       </div>
 
-   <!-- Template - Recipe Card -->
-<template id="recipe-card-template">
-  <article
-    class="recipe-card bg-card-bg rounded-lg overflow-hidden max-w-[380px] border-4 border-transparent hover:border-primary-yellow cursor-pointer flex flex-col"
-  >
-    <!-- Wrapper vide pour l'image -->
-    <div class="recipe-card__image-wrapper relative">
-      
-      <span
-        class="recipe-card__badge absolute top-4 right-4 bg-primary-yellow text-text-black px-4 py-2 rounded-md text-sm font-normal font-family-sans"
-      ></span>
-    </div>
-
-    <div class="recipe-card__content p-6 flex flex-col flex-1">
-      <h3
-        class="recipe-card__title font-family-display text-lg font-normal text-text-black mb-6"
-      ></h3>
-
-      <!-- Recette -->
-      <div
-        class="recipe-card__section recipe-card__section--description flex-1 mb-6"
-      >
-        <h4 class="text-text-grey text-xs font-bold uppercase mb-3">
-          Recette
-        </h4>
-        <p class="recipe-card__description text-text-black text-sm"></p>
-      </div>
-
-      <!-- Ingrédients -->
-      <div class="recipe-card__section recipe-card__section--ingredients">
-        <h4
-          class="text-text-grey text-xs font-bold uppercase tracking-wide mb-3"
+      <!-- Template - Recipe Card -->
+      <template id="recipe-card-template">
+        <article
+          class="recipe-card bg-card-bg rounded-lg overflow-hidden max-w-[380px] border-4 border-transparent hover:border-primary-yellow cursor-pointer flex flex-col"
         >
-          Ingrédients
-        </h4>
-        <div
-          class="recipe-card__ingredients-grid grid grid-cols-2 gap-x-4 gap-y-3"
-        ></div>
-      </div>
-    </div>
-  </article>
-</template>
+          <!-- Wrapper vide pour l'image -->
+          <div class="recipe-card__image-wrapper relative">
+            <span
+              class="recipe-card__badge absolute top-4 right-4 bg-primary-yellow text-text-black px-4 py-2 rounded-md text-sm font-normal font-family-sans"
+            ></span>
+          </div>
 
+          <div class="recipe-card__content p-6 flex flex-col flex-1">
+            <h3
+              class="recipe-card__title font-family-display text-lg font-normal text-text-black mb-6"
+            ></h3>
+
+            <!-- Recette -->
+            <div
+              class="recipe-card__section recipe-card__section--description flex-1 mb-6"
+            >
+              <h4 class="text-text-grey text-xs font-bold uppercase mb-3">
+                Recette
+              </h4>
+              <p class="recipe-card__description text-text-black text-sm"></p>
+            </div>
+
+            <!-- Ingrédients -->
+            <div class="recipe-card__section recipe-card__section--ingredients">
+              <h4
+                class="text-text-grey text-xs font-bold uppercase tracking-wide mb-3"
+              >
+                Ingrédients
+              </h4>
+              <div
+                class="recipe-card__ingredients-grid grid grid-cols-2 gap-x-4 gap-y-3"
+              ></div>
+            </div>
+          </div>
+        </article>
+      </template>
 
       <!-- Conteneur des recettes -->
       <section
