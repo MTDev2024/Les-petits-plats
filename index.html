@@ -336,51 +336,49 @@
         </p>
       </div>
 
-      <!-- Template - Recipe Card -->
-      <template id="recipe-card-template">
-        <article
-          class="recipe-card bg-card-bg rounded-lg overflow-hidden max-w-[380px] border-4 border-transparent hover:border-primary-yellow cursor-pointer flex flex-col"
+   <!-- Template - Recipe Card -->
+<template id="recipe-card-template">
+  <article
+    class="recipe-card bg-card-bg rounded-lg overflow-hidden max-w-[380px] border-4 border-transparent hover:border-primary-yellow cursor-pointer flex flex-col"
+  >
+    <!-- Wrapper vide pour l'image -->
+    <div class="recipe-card__image-wrapper relative">
+      
+      <span
+        class="recipe-card__badge absolute top-4 right-4 bg-primary-yellow text-text-black px-4 py-2 rounded-md text-sm font-normal font-family-sans"
+      ></span>
+    </div>
+
+    <div class="recipe-card__content p-6 flex flex-col flex-1">
+      <h3
+        class="recipe-card__title font-family-display text-lg font-normal text-text-black mb-6"
+      ></h3>
+
+      <!-- Recette -->
+      <div
+        class="recipe-card__section recipe-card__section--description flex-1 mb-6"
+      >
+        <h4 class="text-text-grey text-xs font-bold uppercase mb-3">
+          Recette
+        </h4>
+        <p class="recipe-card__description text-text-black text-sm"></p>
+      </div>
+
+      <!-- Ingrédients -->
+      <div class="recipe-card__section recipe-card__section--ingredients">
+        <h4
+          class="text-text-grey text-xs font-bold uppercase tracking-wide mb-3"
         >
-          <div class="recipe-card__image-wrapper relative">
-            <img
-              src=""
-              alt=""
-              class="recipe-card__image w-full h-[253px] object-cover"
-            />
-            <span
-              class="recipe-card__badge absolute top-4 right-4 bg-primary-yellow text-text-black px-4 py-2 rounded-md text-sm font-normal font-family-sans"
-            ></span>
-          </div>
+          Ingrédients
+        </h4>
+        <div
+          class="recipe-card__ingredients-grid grid grid-cols-2 gap-x-4 gap-y-3"
+        ></div>
+      </div>
+    </div>
+  </article>
+</template>
 
-          <div class="recipe-card__content p-6 flex flex-col flex-1">
-            <h3
-              class="recipe-card__title font-family-display text-lg font-normal text-text-black mb-6"
-            ></h3>
-
-            <!-- Recette -->
-            <div
-              class="recipe-card__section recipe-card__section--description flex-1 mb-6"
-            >
-              <h4 class="text-text-grey text-xs font-bold uppercase mb-3">
-                Recette
-              </h4>
-              <p class="recipe-card__description text-text-black text-sm"></p>
-            </div>
-
-            <!-- Ingrédients -->
-            <div class="recipe-card__section recipe-card__section--ingredients">
-              <h4
-                class="text-text-grey text-xs font-bold uppercase tracking-wide mb-3"
-              >
-                Ingrédients
-              </h4>
-              <div
-                class="recipe-card__ingredients-grid grid grid-cols-2 gap-x-4 gap-y-3"
-              ></div>
-            </div>
-          </div>
-        </article>
-      </template>
 
       <!-- Conteneur des recettes -->
       <section

@@ -12,7 +12,7 @@
 
 @font-face {
   font-family: 'Anton';
-  src: url('../fonts/anton-v25-latin-regular.woff2') format('woff2');
+  src: url('../fonts/anton-v27-latin-regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -26,7 +26,7 @@
   --color-light-grey: #ededed;
   --color-card-bg: #ffffff;
   /* --color-text-grey: #7a7a7a; */
-  --color-text-grey: #6b7280; /* Tailwind gray-500 accessibilité - contraste adapté */
+  --color-text-grey: #6b7280; /* Tailwind gray-500 pour accessibilité et contraste adapté */
   --color-text-black: #000000;
   --color--black: #1b1b1b;
 

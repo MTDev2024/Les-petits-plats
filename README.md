@@ -145,7 +145,6 @@ les-petits-plats/
 │
 ├── 📄 index.html
 ├── 📄 README.md
-├── 📄 readme-petits-plats.md
 ├── 📄 package.json
 ├── 📄 package-lock.json
 ├── 📄 tailwind.config.js
@@ -237,11 +236,6 @@ Ce projet applique les principes de l'**éco-conception web** :
 | **Images lazy loading**   | Chargement à la demande            | Économie bande passante |
 | **Format .woff2**         | Compression optimale des fonts     | -30% vs .woff           |
 
-
-### 📝 Phase 4 - Documentation (Semaine 3)
-
-- [ ] Fiche d'investigation complète
-- [ ] README finalisé
 
 
 **⭐ Si ce projet vous a plu, n'hésitez pas à lui donner une étoile ! ⭐**
