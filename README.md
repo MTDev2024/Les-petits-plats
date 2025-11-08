@@ -218,10 +218,10 @@ les-petits-plats/
 - CSS optimisé
 - Algorithme de recherche performant
 
-│  🧪 Tests Jsben.ch                 
-│  •   50 recettes : jsben.ch/CFOfB    
-│  • 1500 recettes : jsben.ch/9gvkq  
-│  • 5000 recettes : jsben.ch/7Khsu  
+│ 🧪 Tests Jsben.ch  
+│ • 50 recettes : jsben.ch/CFOfB  
+│ • 1500 recettes : jsben.ch/9gvkq  
+│ • 5000 recettes : jsben.ch/7Khsu
 
 ---
 
