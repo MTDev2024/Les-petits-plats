@@ -1,30 +1,30 @@
 <!doctype html>
 <html lang="fr">
   <head>
-    <meta charset="UTF-8" >
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
       content="Les Petits Plats - Trouvez rapidement la recette parfaite parmi nos 50 recettes de cuisine"
-    >
-    <meta name="author" content="Les Petits Plats" >
-    <link rel="icon" type="image/png" href="./images/favicon.png" >
+    />
+    <meta name="author" content="Les Petits Plats" />
+    <link rel="icon" type="image/png" href="./images/favicon.png">
 
     <!-- Open Graph (partage réseaux sociaux) -->
     <meta
       property="og:title"
       content="Les Petits Plats - Recettes de cuisine"
-    >
+    />
     <meta
       property="og:description"
       content="Trouvez rapidement la recette parfaite"
-    >
-    <meta property="og:type" content="website" >
+    />
+    <meta property="og:type" content="website" />
 
     <title>Les Petits Plats - Recherche de recettes</title>
 
     <!-- Tailwind CSS -->
-    <link rel="stylesheet" href="css/output.css" >
+    <link rel="stylesheet" href="css/output.css" />
   </head>
 
   <body class="bg-light-grey font-sans">
@@ -43,15 +43,14 @@
             src="images/logo/Logo.png"
             alt="Les Petits Plats"
             class="header__logo w-32 md:w-[350px] lg:w-[180px] h-auto sm:w-[300px]"
-          >
+          />
         </div>
 
         <!-- Phrase d'accroche -->
         <h1
           class="header__title text-3xl md:text-4xl lg:text-[44px] font-normal mb-4 font-family-display text-primary-yellow"
         >
-          CHERCHEZ PARMI PLUS DE 1500 RECETTES
-          <br>
+          CHERCHEZ PARMI PLUS DE 1500 RECETTES <br />
           DU QUOTIDIEN, SIMPLES ET DÉLICIEUSES
         </h1>
 
@@ -59,9 +58,9 @@
         <div class="search-bar w-full max-w-[70%]">
           <div class="search-bar__wrapper relative">
             <!-- Label accessible caché -->
-            <label for="main-search" class="sr-only">
-              Rechercher une recette
-            </label>
+            <label for="main-search" class="sr-only"
+              >Rechercher une recette</label
+            >
 
             <!-- Input principal -->
             <input
@@ -69,7 +68,7 @@
               id="main-search"
               placeholder="Rechercher une recette, un ingrédient, ..."
               class="search-bar__input w-full bg-white px-6 py-4 pr-20 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-primary-yellow placeholder-gray-800"
-            >
+            />
 
             <!-- Bouton de recherche -->
             <button
@@ -100,12 +99,12 @@
     <!-- Main -->
     <main class="container mx-auto px-4 py-12 max-w-[1250px]">
       <!-- Filtres -->
-      <section class="filters flex justify-between mb-4">
+      <section class="filters flex flex-col-reverse lg:flex-row justify-between mb-4">
         <h2 class="sr-only">Filtres de recherche</h2>
 
-        <div class="dropdowns flex gap-10 cursor-pointer">
+        <div class="dropdowns flex flex-col mt-4 md:flex-row gap-4 md:gap-10 cursor-pointer">
           <!-- Dropdown Ingrédients -->
-          <div class="ingredients-dropdown">
+          <div class="ingredients-dropdown relative">
             <!-- Bouton principal -->
             <button
               class="dropdown__toggle flex items-center justify-between w-56 bg-white px-4 py-2 rounded-md font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-yellow"
@@ -136,15 +135,15 @@
             >
               <!-- Barre de recherche -->
               <div class="dropdown__search-bar relative border">
-                <label for="ingredients-search" class="sr-only">
-                  Rechercher un ingrédient
-                </label>
+                <label for="ingredients-search" class="sr-only"
+                  >Rechercher un ingrédient</label
+                >
                 <input
                   type="text"
                   id="ingredients-search"
                   placeholder="Rechercher..."
                   class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md placeholder-gray-800"
-                >
+                />
                 <svg
                   class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
                   fill="none"
@@ -168,7 +167,7 @@
           </div>
 
           <!-- Dropdown Appareils -->
-          <div class="appareils-dropdown">
+          <div class="appareils-dropdown relative">
             <!-- Bouton principal -->
             <button
               class="dropdown__toggle flex items-center justify-between w-56 bg-white px-4 py-2 rounded-md font-semibold text-gray-800 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-primary-yellow"
@@ -200,15 +199,15 @@
             >
               <!-- Barre de recherche -->
               <div class="dropdown__search-bar relative border">
-                <label for="appareils-search" class="sr-only">
-                  Rechercher un appareil
-                </label>
+                <label for="appareils-search" class="sr-only"
+                  >Rechercher un appareil</label
+                >
                 <input
                   type="text"
                   id="appareils-search"
                   placeholder="Rechercher..."
                   class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md placeholder-gray-800"
-                >
+                />
                 <svg
                   class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
                   fill="none"
@@ -273,15 +272,15 @@
             >
               <!-- Barre de recherche -->
               <div class="dropdown__search-bar relative border">
-                <label for="ustensiles-search" class="sr-only">
-                  Rechercher un ustensile
-                </label>
+                <label for="ustensiles-search" class="sr-only"
+                  >Rechercher un ustensile</label
+                >
                 <input
                   type="text"
                   id="ustensiles-search"
                   placeholder="Rechercher..."
                   class="dropdown__search w-full px-4 py-4 text-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-primary-yellow rounded-md placeholder-gray-800"
-                >
+                />
                 <svg
                   class="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none"
                   fill="none"
@@ -316,7 +315,7 @@
 
         <div class="recipes-total">
           <p class="font-family-display text-xl font-normal text-text-black">
-            1500 recettes
+            
           </p>
         </div>
       </section>
@@ -326,6 +325,7 @@
         <h2 class="sr-only">Mots-clés sélectionnés</h2>
         <!-- Tags actifs injectés ici -->
       </section>
+
       <!-- Message d'erreur -->
       <div
         id="no-results-message"
@@ -333,8 +333,7 @@
       >
         <p class="text-lg text-gray-700">
           Aucune recette ne contient
-          <span id="search-term" class="font-semibold"></span>
-          .
+          <span id="search-term" class="font-semibold"></span>.
         </p>
       </div>
 
